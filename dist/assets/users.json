@@ -1,0 +1,68 @@
+{
+  "Items" : [ 
+    {
+      "id" : 12,
+      "firstName": "Aby",
+      "lastName": "John",
+      "fullName": "Aby John",
+      "emailAddress" :"aby@gmail.com",
+      "isActive": 1,
+      "customerAdmin" : 1,
+      "successHackerAdmin" : 0,
+      "createDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "createdBy" : { "id": 1, "fullName": "John Doe" },
+      "modifiedDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "modifiedBy" : { "id": 1, "fullName": "John Doe" },
+      "lastLoginDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "company" : {
+        "Id" : "1",
+        "name": "BPCL",
+        "isActive": 1,
+        "createDate" : "Thu Jul 15 2020 11:04:02 GMT+0530 (India Standard Time)",
+        "createdBy" : { "id": 12, "fullName": "Aby John" },
+        "modifiedDate" : "Thu Jul 17 2020 11:04:02 GMT+0530 (India Standard Time)",
+        "modifiedBy" : { "id": 12, "fullName": "Aby John" },
+        "userCount" : 20,
+        "groups" : [ "Group 2" ]
+      }, 
+      "groups" : [ "Group 2" ]
+    },
+    {
+      "id" : 12,
+      "firstName": "Jeffery",
+      "lastName": "Setty",
+      "fullName": "Jeffery Setty",
+      "emailAddress" :"jeffery@gmail.com",
+      "isActive": 1,
+      "customerAdmin" : 1,
+      "successHackerAdmin" : 0,
+      "createDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "createdBy" : { "id": 1, "fullName": "John Doe" },
+      "modifiedDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "modifiedBy" : { "id": 1, "fullName": "John Doe" },
+      "lastLoginDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "company" : {
+        "Id" : "1",
+        "name": "Syska",
+        "isActive": 1,
+        "createDate" : "Thu Jul 13 2020 11:04:02 GMT+0530 (India Standard Time)",
+        "createdBy" : { "id": 11, "fullName": "Jeffery Setty" },
+        "modifiedDate" : "Thu Jul 14 2020 11:04:02 GMT+0530 (India Standard Time)",
+        "modifiedBy" : { "id": 11, "fullName": "Jeffery Setty" },
+        "userCount" : 5,
+        "groups" : [ "Group 2" ]
+      }, 
+      "groups" : [ "Group 2" ]
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "current_page": 1,
+      "next_page": 2,
+      "prev_page": 0,
+      "total_pages": 10,
+      "total_items": 250,
+      "entries_info": "1-25 of 250"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "dataSource": [
+    {
+      "group": "Food & Drink",
+      "items": [
+        "Food & Drink",
+        "Catering & Events",
+        "Coffee, Cafes & Restaurants",
+        "Pubs, Bars & Clubs",
+        "Takeaway & Casual Dining",
+        "Vending"
+      ]
+    },
+    {
+      "group": "Health, Beauty & Fitness",
+      "items": [
+        "Health, Beauty & Fitness",
+        "Hair, Beauty & Spa",
+        "Health & Medical",
+        "Sport, Fitness & Adventure"
+      ]
+    },
+    {
+      "group": "Retail",
+      "items": [
+        "Retail",
+        "Books, Stationery & DVDs",
+        "Convenience, Grocery & Liquor stores",
+        "Discount & Variety Stores",
+        "Fashion",
+        "Food outlets",
+        "Gifts & Florists",
+        "Homewares & furniture",
+        "Newsagency, Lottery & Post Office",
+        "Specialty retail"
+      ]
+    },
+    {
+      "group": "Commercial Services",
+      "items": [
+        "Commercial Services",
+        "Agriculture & Primary services",
+        "Automotive & Marine",
+        "Building & Construction",
+        "Business services",
+        "Manufacturing, Wholesale & Distribution",
+        "Safety & Security",
+        "Telecommunications & Internet",
+        "Transport & Storage"
+      ]
+    },
+    {
+      "group": "Personal Services",
+      "items": 
+      [
+        "Personal Services",
+        "Aged Care & Retirement",
+        "Children's products & services",
+        "Education, Coaching & Training",
+        "Mortgage & Finance",
+        "Pet products & services",
+        "Real Estate, Property & Relocation"
+      ]
+    },
+    {
+      "group": "Cleaning & Maintenance",
+      "items": [
+        "Cleaning & Maintenance",
+        "Cleaning",
+        "Garden, pool & outdoor maintenance",
+        "Handymen & Home services"
+      ]
+    },
+    {
+      "group": "Miscellaneous",
+      "items": [
+        "Miscellaneous",
+        "Accommodation & Tourism",
+        "Entertainment & Amusement",
+        "Green & Eco friendly",
+        "Master Franchises"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "Items" : [
+    {
+      "Id" : "1",
+      "name": "Smart Axiom",
+      "isActive": 1,
+      "createDate" : "Thu Jul 12 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "createdBy" : { "id": 10, "fullName": "Juergen D'Souza" },
+      "modifiedDate" : "Thu Jul 15 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "modifiedBy" : { "id": 10, "fullName": "Juergen D'Souza" },
+      "userCount" : 20,
+      "groups" : [ "Group 1", "Group 2" ]
+    },
+    {
+      "Id" : "1",
+      "name": "Syska",
+      "isActive": 1,
+      "createDate" : "Thu Jul 13 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "createdBy" : { "id": 11, "fullName": "Jeffery Setty" },
+      "modifiedDate" : "Thu Jul 14 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "modifiedBy" : { "id": 11, "fullName": "Jeffery Setty" },
+      "userCount" : 5,
+      "groups" : [ "Group 2" ]
+    },
+    {
+      "Id" : "1",
+      "name": "LNT",
+      "isActive": 0,
+      "createDate" : "Thu Jul 14 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "createdBy" : { "id": 17, "fullName": "Ishraque Khan" },
+      "modifiedDate" : "Thu Jul 15 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "modifiedBy" : { "id": 17, "fullName": "Ishraque Khan" },
+      "userCount" : 7,
+      "groups" : [ "Group 2", "Group 3" ]
+    },
+    {
+      "Id" : "1",
+      "name": "BPCL",
+      "isActive": 1,
+      "createDate" : "Thu Jul 15 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "createdBy" : { "id": 12, "fullName": "Aby John" },
+      "modifiedDate" : "Thu Jul 17 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "modifiedBy" : { "id": 12, "fullName": "Aby John" },
+      "userCount" : 11,
+      "groups" : [ "Group 2" ]
+    },
+    {
+      "Id" : "1",
+      "name": "RVNL",
+      "isActive": 0,
+      "createDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "createdBy" : { "id": 14, "fullName": "Kevin" },
+      "modifiedDate" : "Thu Jul 23 2020 11:04:02 GMT+0530 (India Standard Time)",
+      "modifiedBy" : { "id": 14, "fullName": "Kevin" },
+      "userCount" : 13,
+      "groups" : [ "Group 1" ]
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "current_page": 1,
+      "next_page": 2,
+      "prev_page": 0,
+      "total_pages": 10,
+      "total_items": 250,
+      "entries_info": "1-25 of 250"
+    }
+  }
+}
