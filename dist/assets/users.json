@@ -1,68 +1,56 @@
 {
-  "Items" : [ 
+  "items": [
     {
-      "id" : 12,
-      "firstName": "Aby",
-      "lastName": "John",
-      "fullName": "Aby John",
-      "emailAddress" :"aby@gmail.com",
-      "isActive": 1,
-      "customerAdmin" : 1,
-      "successHackerAdmin" : 0,
-      "createDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
-      "createdBy" : { "id": 1, "fullName": "John Doe" },
-      "modifiedDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
-      "modifiedBy" : { "id": 1, "fullName": "John Doe" },
-      "lastLoginDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
-      "company" : {
-        "Id" : "1",
-        "name": "BPCL",
-        "isActive": 1,
-        "createDate" : "Thu Jul 15 2020 11:04:02 GMT+0530 (India Standard Time)",
-        "createdBy" : { "id": 12, "fullName": "Aby John" },
-        "modifiedDate" : "Thu Jul 17 2020 11:04:02 GMT+0530 (India Standard Time)",
-        "modifiedBy" : { "id": 12, "fullName": "Aby John" },
-        "userCount" : 20,
-        "groups" : [ "Group 2" ]
-      }, 
-      "groups" : [ "Group 2" ]
-    },
-    {
-      "id" : 12,
-      "firstName": "Jeffery",
-      "lastName": "Setty",
-      "fullName": "Jeffery Setty",
-      "emailAddress" :"jeffery@gmail.com",
-      "isActive": 1,
-      "customerAdmin" : 1,
-      "successHackerAdmin" : 0,
-      "createDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
-      "createdBy" : { "id": 1, "fullName": "John Doe" },
-      "modifiedDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
-      "modifiedBy" : { "id": 1, "fullName": "John Doe" },
-      "lastLoginDate" : "Thu Jul 19 2020 11:04:02 GMT+0530 (India Standard Time)",
-      "company" : {
-        "Id" : "1",
-        "name": "Syska",
-        "isActive": 1,
-        "createDate" : "Thu Jul 13 2020 11:04:02 GMT+0530 (India Standard Time)",
-        "createdBy" : { "id": 11, "fullName": "Jeffery Setty" },
-        "modifiedDate" : "Thu Jul 14 2020 11:04:02 GMT+0530 (India Standard Time)",
-        "modifiedBy" : { "id": 11, "fullName": "Jeffery Setty" },
-        "userCount" : 5,
-        "groups" : [ "Group 2" ]
-      }, 
-      "groups" : [ "Group 2" ]
+      "id": "1",
+      "emailAddress": "kr@friskmethods.net",
+      "lastName": "Ravakoli",
+      "firstName": "Kuya",
+      "isSuccessHackerAdmin": 0,
+      "lastSeenDate": "2019-10-05 17:28:08.310",
+      "createDate": "2018-06-15 19:03:51.277",
+      "company": {
+        "modifiedBy": {
+          "id": 3908,
+          "fullName": "Data Pipeline"
+        },
+        "userCount": 1,
+        "groups": [
+          "Frisk Methods Test Group"
+        ],
+        "id": 1,
+        "modifiedDate": "2019-02-01",
+        "createdBy": {
+          "id": 3908,
+          "fullName": "Data Pipeline"
+        },
+        "createDate": "2019-01-01",
+        "name": "friskmethods",
+        "isActive": 1
+      },
+      "modifiedBy": {
+        "userId": "3908",
+        "fullName": "Data Pipeline"
+      },
+      "userId": 15,
+      "fullName": "Kuya Ravakoli",
+      "isCustomerAdmin": 0,
+      "createdBy": {
+        "userId": "3908",
+        "fullName": "Data Pipeline"
+      },
+      "modifiedDate": "2019-10-05 17:28:08.310",
+      "groups": [
+        "Frisk Methods Test Group"
+      ],
+      "isActive": 1
     }
   ],
   "meta": {
     "pagination": {
       "current_page": 1,
-      "next_page": 2,
-      "prev_page": 0,
-      "total_pages": 10,
-      "total_items": 250,
-      "entries_info": "1-25 of 250"
+      "total_pages": 1,
+      "entries_info": "1-1 of 1",
+      "total_items": 1
     }
   }
 }

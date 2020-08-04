@@ -1,8 +1,8 @@
 {
-  "id": 123,
-  "emailAddress": "kr@friskmethods.net",
+  "id": "2", 
+  "emailAddress": "pr@friskmethods.net",
   "lastName": "Ravakoli",
-  "firstName": "Kuya",
+  "firstName": "Pula",
   "isSuccessHackerAdmin": 0,
   "lastSeenDate": "2019-10-05 17:28:08.310",
   "createDate": "2018-06-15 19:03:51.277",
@@ -30,7 +30,7 @@
     "fullName": "Data Pipeline"
   },
   "userId": 15,
-  "fullName": "Kuya Ravakoli",
+  "fullName": "Pula Ravakoli",
   "isCustomerAdmin": 0,
   "createdBy": {
     "userId": "3908",
