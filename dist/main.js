@@ -18,7 +18,7 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\t<head>\r\n\r\n\t\t<meta charset=\"utf-8\">\r\n\t\t<meta content=\"width=device-width, initial-scale=1, shrink-to-fit=no\" name=\"viewport\">\r\n\t\t<meta name=\"description\" content=\"Dashlead -  Admin Panel HTML Dashboard Template\">\r\n\t\t<meta name=\"author\" content=\"Spruko Technologies Private Limited\">\r\n\t\t<meta name=\"keywords\" content=\"sales dashboard, admin dashboard, bootstrap 4 admin template, html admin template, admin panel design, admin panel design, bootstrap 4 dashboard, admin panel template, html dashboard template, bootstrap admin panel, sales dashboard design, best sales dashboards, sales performance dashboard, html5 template, dashboard template\">\r\n\r\n\t\t<!-- Favicon -->\r\n\t\t<link rel=\"icon\" href=\"assets/assets/img/brand/favicon.ico\" type=\"image/x-icon\"/>\r\n\r\n\t\t<!-- Title -->\r\n\t\t<title>Dashlead -  Admin Panel HTML Dashboard Template</title>\r\n\r\n\t\t\r\n\r\n\t</head>\r\n\r\n\t<body class=\"main-body\">\r\n\r\n\t\t<!-- Loader -->\r\n\t\t<!-- <div id=\"global-loader\" style=\"display: none;\">\r\n\t\t\t<img src=\"assets/assets/img/loader.svg\" class=\"loader-img\" alt=\"Loader\">\r\n\t\t</div> -->\r\n\t\t<!-- End Loader -->\r\n\r\n\t\t<!-- Page -->\r\n\t\t<div class=\"page\">\r\n\r\n\t\t\t<!-- Sidemenu -->\r\n\t\t\t<div class=\"main-sidebar main-sidebar-sticky side-menu\">\r\n\t\t\t\t<div class=\"sidemenu-logo\">\r\n\t\t\t\t\t<a class=\"main-logo\" href=\"index.html\">\r\n\t\t\t\t\t\t<img src=\"assets/assets/img/brand/logo.png\" class=\"header-brand-img desktop-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t<img src=\"assets/assets/img/brand/icon.png\" class=\"header-brand-img icon-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t<img src=\"assets/assets/img/brand/logo-light.png\" class=\"header-brand-img desktop-logo theme-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t<img src=\"assets/assets/img/brand/icon-light.png\" class=\"header-brand-img icon-logo theme-logo\" alt=\"logo\">\r\n\t\t\t\t\t</a>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"main-sidebar-body\">\r\n\t\t\t\t\t<ul class=\"nav\">\r\n\t\t\t\t\t\t<!-- <li class=\"nav-item\">\r\n\t\t\t\t\t\t\t<a class=\"nav-link\" [routerLink]=\"['/dashboard']\"><i class=\"fe fe-airplay\"></i><span class=\"sidemenu-label\">Dashboard</span></a>\r\n\t\t\t\t\t\t</li> -->\r\n\t\t\t\t\t\t<li class=\"nav-item\" [ngClass]=\"{'active': currentPage == 'companies'}\">\r\n\t\t\t\t\t\t\t<a class=\"nav-link\" [routerLink]=\"['/company/list']\"><i class=\"fe fe-list\"></i><span class=\"sidemenu-label\">Companies</span></a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t<li class=\"nav-item\" [ngClass]=\"{'active': currentPage == 'users'}\">\r\n\t\t\t\t\t\t\t<a class=\"nav-link\" [routerLink]=\"['/user/list']\"><i class=\"fe fe-users\"></i><span class=\"sidemenu-label\">Users</span></a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<!-- End Sidemenu -->\r\n\r\n\t\t\t<!-- Main Content-->\r\n\t\t\t<div class=\"main-content side-content pt-0\">\r\n\r\n\t\t\t\t<!-- Main Header-->\r\n\t\t\t\t<div class=\"main-header side-header sticky\">\r\n\t\t\t\t\t<div class=\"container-fluid\">\r\n\t\t\t\t\t\t<div class=\"main-header-left\">\r\n\t\t\t\t\t\t\t<a class=\"main-logo d-lg-none\" href=\"index.html\">\r\n\t\t\t\t\t\t\t\t<img src=\"assets/assets/img/brand/logo.png\" class=\"header-brand-img desktop-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t\t\t<img src=\"assets/assets/img/brand/icon.png\" class=\"header-brand-img icon-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t\t\t<img src=\"assets/assets/img/brand/logo-light.png\" class=\"header-brand-img desktop-logo theme-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t\t\t<img src=\"assets/assets/img/brand/icon-light.png\" class=\"header-brand-img icon-logo theme-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t<a class=\"main-header-menu-icon\"  id=\"mainSidebarToggle\"><span></span></a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"main-header-right\">\r\n\t\t\t\t\t\t\t<div class=\"dropdown d-md-flex\">\r\n\t\t\t\t\t\t\t\t<a class=\"main-content-title tx-20 mg-b-5\">{{ currentUser?.firstName }} {{ currentUser?.lastName }}</a>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"dropdown d-md-flex\">\r\n\t\t\t\t\t\t\t\t<a class=\"nav-link icon\" (click)=\"logout()\">\r\n\t\t\t\t\t\t\t\t\t<i class=\"fa fa-power-off\"></i>\r\n\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<!-- End Main Header-->\r\n\t\t\t\t<app-loading></app-loading>\r\n        <router-outlet></router-outlet>\r\n\t\t\t\t\r\n\t\t\t</div>\r\n\t\t\t<!-- End Main Content-->\r\n\r\n\t\t\t<!-- Main Footer-->\r\n\t\t\t<div class=\"main-footer text-center\">\r\n\t\t\t\t<div class=\"container\">\r\n\t\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t\t\t\t<span>Copyright © {{ fullYear }} <a href=\"#\">Success Hacker</a>. Designed by <a href=\"https://amwebtech.com/\" target=\"_blank\">AM Webtech</a> All rights reserved.</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<!--End Footer-->\r\n\r\n\t\t</div>\r\n\t\t<!-- End Page -->\r\n\r\n\t\t<!-- Back-to-top -->\r\n\t\t<a href=\"#top\" id=\"back-to-top\"><i class=\"fe fe-arrow-up\"></i></a>\r\n\r\n\t</body>\r\n</html>"
+module.exports = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n\t<head>\r\n\r\n\t\t<meta charset=\"utf-8\">\r\n\t\t<meta content=\"width=device-width, initial-scale=1, shrink-to-fit=no\" name=\"viewport\">\r\n\t\t<meta name=\"description\" content=\"Dashlead -  Admin Panel HTML Dashboard Template\">\r\n\t\t<meta name=\"author\" content=\"Spruko Technologies Private Limited\">\r\n\t\t<meta name=\"keywords\" content=\"sales dashboard, admin dashboard, bootstrap 4 admin template, html admin template, admin panel design, admin panel design, bootstrap 4 dashboard, admin panel template, html dashboard template, bootstrap admin panel, sales dashboard design, best sales dashboards, sales performance dashboard, html5 template, dashboard template\">\r\n\r\n\t\t<!-- Favicon -->\r\n\t\t<link rel=\"icon\" href=\"assets/assets/img/brand/favicon.ico\" type=\"image/x-icon\"/>\r\n\r\n\t\t<!-- Title -->\r\n\t\t<title>Dashlead -  Admin Panel HTML Dashboard Template</title>\r\n\r\n\t\t\r\n\r\n\t</head>\r\n\r\n\t<body class=\"main-body\">\r\n\r\n\t\t<!-- Loader -->\r\n\t\t<!-- <div id=\"global-loader\" style=\"display: none;\">\r\n\t\t\t<img src=\"assets/assets/img/loader.svg\" class=\"loader-img\" alt=\"Loader\">\r\n\t\t</div> -->\r\n\t\t<!-- End Loader -->\r\n\r\n\t\t<!-- Page -->\r\n\t\t<div class=\"page\">\r\n\r\n\t\t\t<!-- Sidemenu -->\r\n\t\t\t<div class=\"main-sidebar main-sidebar-sticky side-menu\">\r\n\t\t\t\t<div class=\"sidemenu-logo\">\r\n\t\t\t\t\t<a class=\"main-logo\" href=\"index.html\">\r\n\t\t\t\t\t\t<img src=\"assets/assets/img/brand/logo.png\" class=\"header-brand-img desktop-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t<img src=\"assets/assets/img/brand/icon.png\" class=\"header-brand-img icon-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t<img src=\"assets/assets/img/brand/logo-light.png\" class=\"header-brand-img desktop-logo theme-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t<img src=\"assets/assets/img/brand/icon-light.png\" class=\"header-brand-img icon-logo theme-logo\" alt=\"logo\">\r\n\t\t\t\t\t</a>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"main-sidebar-body\">\r\n\t\t\t\t\t<ul class=\"nav\">\r\n\t\t\t\t\t\t<!-- <li class=\"nav-item\">\r\n\t\t\t\t\t\t\t<a class=\"nav-link\" [routerLink]=\"['/dashboard']\"><i class=\"fe fe-airplay\"></i><span class=\"sidemenu-label\">Dashboard</span></a>\r\n\t\t\t\t\t\t</li> -->\r\n\t\t\t\t\t\t<li class=\"nav-item\" [ngClass]=\"{'active': currentPage == 'companies'}\">\r\n\t\t\t\t\t\t\t<a class=\"nav-link\" [routerLink]=\"['/company/list']\"><i class=\"fe fe-list\"></i><span class=\"sidemenu-label\">Companies</span></a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t<li class=\"nav-item\" [ngClass]=\"{'active': currentPage == 'users'}\">\r\n\t\t\t\t\t\t\t<a class=\"nav-link\" [routerLink]=\"['/user/list']\"><i class=\"fe fe-users\"></i><span class=\"sidemenu-label\">Users</span></a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t<li class=\"nav-item\" [ngClass]=\"{'active': currentPage == 'bulkimport'}\">\r\n\t\t\t\t\t\t\t<a class=\"nav-link\" [routerLink]=\"['/bulk-import-status']\"><i class=\"fe fe-users\"></i><span class=\"sidemenu-label\">Bulk Import Status</span></a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<!-- End Sidemenu -->\r\n\r\n\t\t\t<!-- Main Content-->\r\n\t\t\t<div class=\"main-content side-content pt-0\">\r\n\r\n\t\t\t\t<!-- Main Header-->\r\n\t\t\t\t<div class=\"main-header side-header sticky\">\r\n\t\t\t\t\t<div class=\"container-fluid\">\r\n\t\t\t\t\t\t<div class=\"main-header-left\">\r\n\t\t\t\t\t\t\t<a class=\"main-logo d-lg-none\" href=\"index.html\">\r\n\t\t\t\t\t\t\t\t<img src=\"assets/assets/img/brand/logo.png\" class=\"header-brand-img desktop-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t\t\t<img src=\"assets/assets/img/brand/icon.png\" class=\"header-brand-img icon-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t\t\t<img src=\"assets/assets/img/brand/logo-light.png\" class=\"header-brand-img desktop-logo theme-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t\t\t<img src=\"assets/assets/img/brand/icon-light.png\" class=\"header-brand-img icon-logo theme-logo\" alt=\"logo\">\r\n\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t<a class=\"main-header-menu-icon\"  id=\"mainSidebarToggle\"><span></span></a>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<div class=\"main-header-right\">\r\n\t\t\t\t\t\t\t<div class=\"dropdown d-md-flex\">\r\n\t\t\t\t\t\t\t\t<a class=\"main-content-title tx-20 mg-b-5\">{{ currentUser?.firstName }} {{ currentUser?.lastName }}</a>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t<div class=\"dropdown d-md-flex\">\r\n\t\t\t\t\t\t\t\t<a class=\"nav-link icon\" (click)=\"logout()\">\r\n\t\t\t\t\t\t\t\t\t<i class=\"fa fa-power-off\"></i>\r\n\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<!-- End Main Header-->\r\n\t\t\t\t<app-loading></app-loading>\r\n        <router-outlet></router-outlet>\r\n\t\t\t\t\r\n\t\t\t</div>\r\n\t\t\t<!-- End Main Content-->\r\n\r\n\t\t\t<!-- Main Footer-->\r\n\t\t\t<div class=\"main-footer text-center\">\r\n\t\t\t\t<div class=\"container\">\r\n\t\t\t\t\t<div class=\"row\">\r\n\t\t\t\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t\t\t\t<span>Copyright © {{ fullYear }} <a href=\"#\">Success Hacker</a>. Designed by <a href=\"https://amwebtech.com/\" target=\"_blank\">AM Webtech</a> All rights reserved.</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<!--End Footer-->\r\n\r\n\t\t</div>\r\n\t\t<!-- End Page -->\r\n\r\n\t\t<!-- Back-to-top -->\r\n\t\t<a href=\"#top\" id=\"back-to-top\"><i class=\"fe fe-arrow-up\"></i></a>\r\n\r\n\t</body>\r\n</html>"
 
 /***/ }),
 
@@ -365,7 +365,7 @@ var DefaultLayoutComponent = /** @class */ (function () {
     };
     DefaultLayoutComponent.prototype.logout = function () {
         this.jwtService.destroyToken();
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/thank-you']);
     };
     DefaultLayoutComponent.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
@@ -450,6 +450,11 @@ var routes = [
             {
                 path: "user/edit/:id",
                 loadChildren: function () { return Promise.all(/*! import() | views-admin-pages-user-useradd-useradd-module */[__webpack_require__.e("common"), __webpack_require__.e("views-admin-pages-user-useradd-useradd-module")]).then(__webpack_require__.bind(null, /*! ./../../views/admin-pages/user/useradd/useradd.module */ "./src/app/views/admin-pages/user/useradd/useradd.module.ts")).then(function (mod) { return mod.UseraddModule; }); },
+                canActivate: [_shared_ui_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
+            },
+            {
+                path: "bulk-import-status",
+                loadChildren: function () { return Promise.all(/*! import() | views-admin-pages-bulk-import-status-bulk-import-status-module */[__webpack_require__.e("common"), __webpack_require__.e("views-admin-pages-bulk-import-status-bulk-import-status-module")]).then(__webpack_require__.bind(null, /*! ./../../views/admin-pages/bulk-import-status/bulk-import-status.module */ "./src/app/views/admin-pages/bulk-import-status/bulk-import-status.module.ts")).then(function (mod) { return mod.BulkImportStatusModule; }); },
                 canActivate: [_shared_ui_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
             }
         ]
@@ -565,21 +570,17 @@ var routes = [
                 loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-login-login-module */ "views-auth-pages-login-login-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/login/login.module */ "./src/app/views/auth-pages/login/login.module.ts")).then(function (mod) { return mod.LoginModule; }); }
             },
             {
-                path: 'signup',
-                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-signup-signup-module */ "views-auth-pages-signup-signup-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/signup/signup.module */ "./src/app/views/auth-pages/signup/signup.module.ts")).then(function (mod) { return mod.SignupModule; }); }
+                path: 'KlipfolioAccess/:code/:email/:createdt',
+                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-iframe-access-iframe-access-module */ "views-auth-pages-iframe-access-iframe-access-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/iframe-access/iframe-access.module */ "./src/app/views/auth-pages/iframe-access/iframe-access.module.ts")).then(function (mod) { return mod.IframeAccessModule; }); }
             },
             {
-                path: 'email-verification/:userId/:token',
-                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-email-verification-email-verification-module */ "views-auth-pages-email-verification-email-verification-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/email-verification/email-verification.module */ "./src/app/views/auth-pages/email-verification/email-verification.module.ts")).then(function (mod) { return mod.EmailVerificationModule; }); }
+                path: '404',
+                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-error404-error404-module */ "views-auth-pages-error404-error404-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/error404/error404.module */ "./src/app/views/auth-pages/error404/error404.module.ts")).then(function (mod) { return mod.Error404Module; }); }
             },
             {
-                path: 'forgot-password',
-                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-forgot-password-forgot-password-module */ "views-auth-pages-forgot-password-forgot-password-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/forgot-password/forgot-password.module */ "./src/app/views/auth-pages/forgot-password/forgot-password.module.ts")).then(function (mod) { return mod.ForgotPasswordModule; }); }
-            },
-            {
-                path: 'recover-password/:userId/:token',
-                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-recover-password-recover-password-module */ "views-auth-pages-recover-password-recover-password-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/recover-password/recover-password.module */ "./src/app/views/auth-pages/recover-password/recover-password.module.ts")).then(function (mod) { return mod.RecoverPasswordModule; }); }
-            },
+                path: 'thank-you',
+                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-thank-you-thank-you-module */ "views-auth-pages-thank-you-thank-you-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/thank-you/thank-you.module */ "./src/app/views/auth-pages/thank-you/thank-you.module.ts")).then(function (mod) { return mod.ThankYouModule; }); }
+            }
         ]
     }
 ];
@@ -756,7 +757,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 /* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap/modal */ "./node_modules/ngx-bootstrap/modal/fesm5/ngx-bootstrap-modal.js");
 /* harmony import */ var _shared_ui_global_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared-ui/global.service */ "./src/app/shared-ui/global.service.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -766,7 +766,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -798,9 +797,6 @@ var UiComponent = /** @class */ (function () {
     }
     UiComponent.prototype.ngOnInit = function () {
         this.currentUser = JSON.parse(this.jwtService.getCurrentUser());
-        if (this.currentUser && this.currentUser.userType === _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].USERTYPE.ADMIN) {
-            this.router.navigate(['/dashboard']);
-        }
     };
     UiComponent.prototype.logout = function () {
         this.jwtService.destroyToken();
@@ -1163,11 +1159,12 @@ var AuthGuard = /** @class */ (function () {
     }
     AuthGuard.prototype.canActivate = function (next, state) {
         var currentUser = JSON.parse(this.jwtService.getCurrentUser());
-        if (currentUser && currentUser.id) {
+        // if(currentUser && currentUser.id){
+        if (this.jwtService.getToken()) {
             return true;
         }
         else {
-            this.router.navigate(['/signin']);
+            this.router.navigate(['/404']);
         }
     };
     AuthGuard.ctorParameters = function () { return [
@@ -1218,8 +1215,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var GlobalService = /** @class */ (function () {
     function GlobalService(http) {
         this.http = http;
-        this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.apiKey = 'fdHSuR2s$jYX!Vw@TK^naVjq^Xi6ro0giTRlC7jLZWR^exuMxdWtZ&Z69SoVBJZq';
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASEURL;
+        this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.loadingSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     GlobalService.prototype.getActionChildToParent = function () {
         return this.subject.asObservable();
@@ -1228,51 +1227,103 @@ var GlobalService = /** @class */ (function () {
         this.subject.next({ text: action });
     };
     GlobalService.prototype.getLoadingLabel = function () {
-        return this.subject.asObservable();
+        return this.loadingSubject.asObservable();
     };
     GlobalService.prototype.setLoadingLabel = function (action) {
-        this.subject.next({ text: action });
+        this.loadingSubject.next({ text: action });
+    };
+    GlobalService.prototype.getAccess = function (param) {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "validateUser?email=" + param['email'] + "&createdt=" + param['createdt'];
+        return this.http.get(url, { headers: headers });
+    };
+    GlobalService.prototype.getConfig = function (param) {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "config";
+        return this.http.get(url, { headers: headers });
     };
     GlobalService.prototype.getCompanies = function (param) {
-        /* let apiURL = `${this.baseUrl}users/GetCompanies`;
-        return this.http.post(apiURL, param); */
-        return this.http.get('./assets/companies.json');
-        // let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        // headers.append('Content-Type', 'application/json');
-        // headers.append('api-key', 'fdHSuR2s$jYX!Vw@TK^naVjq^Xi6ro0giTRlC7jLZWR^exuMxdWtZ&Z69SoVBJZq');
-        // return this.http.get('https://shadminapidev.azurewebsites.net/api/companies', { headers: headers })
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "companies";
+        return this.http.get(url, { headers: headers });
     };
     GlobalService.prototype.getUsers = function (param) {
-        /* let apiURL = `${this.baseUrl}users/GetUsers`;
-        return this.http.post(apiURL, param); */
-        return this.http.get('./assets/users.json');
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "users?company=" + param['company'];
+        if (param['page']) {
+            url += "&page=" + param['page'];
+        }
+        if (param['group']) {
+            url += "&group=" + param['group'];
+        }
+        if (param['limit']) {
+            url += "&limit=" + param['limit'];
+        }
+        if (param['active']) {
+            url += "&active=" + param['active'];
+        }
+        if (param['sortOrder']) {
+            url += "&sortOrder=" + param['sortOrder'];
+        }
+        if (param['sort']) {
+            url += "&sort=" + param['sort'];
+        }
+        var data = this.http.get(url, { headers: headers });
+        console.log(" users data ============= ", data);
+        return data;
     };
-    GlobalService.prototype.getCompany = function (param) {
-        return this.http.get('./assets/companies.json');
+    GlobalService.prototype.getStatus = function (param) {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "bulkImportStatus?company=" + param['company'] + "&user=" + param['user'];
+        if (param['page']) {
+            url += "&page=" + param['page'];
+        }
+        if (param['group']) {
+            url += "&group=" + param['group'];
+        }
+        if (param['limit']) {
+            url += "&limit=" + param['limit'];
+        }
+        if (param['active']) {
+            url += "&active=" + param['active'];
+        }
+        if (param['sortOrder']) {
+            url += "&sortOrder=" + param['sortOrder'];
+        }
+        if (param['sort']) {
+            url += "&sort=" + param['sort'];
+        }
+        return this.http.get(url, { headers: headers });
+    };
+    GlobalService.prototype.getUserById = function (param) {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "users/" + param['id'];
+        return this.http.get(url, { headers: headers });
+    };
+    GlobalService.prototype.getCompanyById = function (param) {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "companies/" + param['id'];
+        return this.http.get(url, { headers: headers });
     };
     GlobalService.prototype.saveCompany = function (param) {
-        return this.http.get('./assets/companies.json');
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "companies";
+        return this.http.post(url, param, { headers: headers });
     };
     GlobalService.prototype.updateCompany = function (param, id) {
-        return this.http.get('./assets/companies.json');
-    };
-    GlobalService.prototype.getUser = function (param) {
-        /* let apiURL = `${this.baseUrl}users/GetUsers`;
-        return this.http.post(apiURL, param); */
-        return this.http.get('./assets/users.json');
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "companies/" + id;
+        return this.http.put(url, param, { headers: headers });
     };
     GlobalService.prototype.saveUser = function (param) {
-        return this.http.get('./assets/users.json');
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "users";
+        return this.http.post(url, param, { headers: headers });
     };
     GlobalService.prototype.updateUser = function (param, id) {
-        return this.http.get('./assets/users.json');
-    };
-    GlobalService.prototype.uploadFile = function (file) {
-        var newName = file.name.replace(/ /g, '-');
-        var formData = new FormData();
-        formData.append('csv', file, newName);
-        console.log("formData ======= ", formData);
-        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].BASEURL + 'upload', formData);
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
+        var url = this.baseUrl + "users/" + id;
+        return this.http.put(url, param, { headers: headers });
     };
     GlobalService.prototype.emailAlreadyExits = function (param) {
         var apiURL = this.baseUrl + "users/emailAlreadyExits";
@@ -1298,6 +1349,35 @@ var GlobalService = /** @class */ (function () {
             top2.scrollIntoView();
             top2 = null;
         }
+    };
+    GlobalService.prototype.uploadFile = function (file, param) {
+        var newName = file.name.replace(/ /g, '-');
+        var formData = new FormData();
+        formData.append('csv', file, newName);
+        console.log("formData ======= ", formData);
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey, 'Content-Type': 'text/csv' });
+        var url = this.baseUrl + "bulkImport?company=" + param['company'] + "&user=" + param['user'];
+        console.log("url ======= ", url);
+        return this.http.post(url, file, { headers: headers });
+    };
+    GlobalService.prototype.exportData = function (param) {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey, 'Content-Type': 'text/csv' });
+        var url = this.baseUrl + "bulkExport?company=" + param['company'] + "&user=" + param['user'];
+        if (param['active']) {
+            url += "&active=" + param['active'];
+        }
+        if (param['sort']) {
+            url += "&sort=" + param['sort'];
+        }
+        if (param['group']) {
+            url += "&group=" + param['group'];
+        }
+        if (param['search']) {
+            url += "&search=" + param['search'];
+        }
+        var data = this.http.get(url, { headers: headers });
+        console.log(" export data ============= ", data);
+        return data;
     };
     GlobalService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -1811,12 +1891,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    BASEURL: 'http://localhost:3000/',
-    // BASEURL: '/',
-    USERTYPE: {
-        ADMIN: 'admin',
-        BUSINESSOWNER: 'business_owner'
-    }
+    BASEURL: 'https://shadminapidev.azurewebsites.net/api/',
 };
 
 
