@@ -32,6 +32,9 @@ var User = /** @class */ (function () {
 
 var CompanySearch = /** @class */ (function () {
     function CompanySearch() {
+        this.page = 1;
+        this.limit = 25;
+        this.isActive = "";
     }
     return CompanySearch;
 }());
@@ -41,11 +44,12 @@ var UserSearch = /** @class */ (function () {
         this.page = 1;
         this.limit = 25;
         this.company = "";
-        this.active = "";
+        this.isActive = "";
         this.group = "";
         this.search = "";
-        this.sort = "";
+        this.sort = "lastName";
         this.sortOrder = 'ASC';
+        this.user = "";
     }
     return UserSearch;
 }());

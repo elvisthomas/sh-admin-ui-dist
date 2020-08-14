@@ -166,7 +166,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 var routes = [
-    { path: '', redirectTo: 'signin', pathMatch: 'full' },
+    { path: '', redirectTo: 'company/list', pathMatch: 'full' },
     { path: 'auth', component: _layouts_auth_layout_auth_layout_component__WEBPACK_IMPORTED_MODULE_3__["AuthLayoutComponent"], data: { title: 'Auth' }, pathMatch: 'full' },
     { path: 'ui', component: _layouts_home_layout_ui_component__WEBPACK_IMPORTED_MODULE_2__["UiComponent"], data: { title: 'Home' }, pathMatch: 'full' },
     { path: 'admin', component: _layouts_admin_layout_default_layout_component__WEBPACK_IMPORTED_MODULE_4__["DefaultLayoutComponent"], data: { title: 'Home' }, pathMatch: 'full' }
@@ -424,7 +424,7 @@ var routes = [
             },
             {
                 path: "company/list",
-                loadChildren: function () { return __webpack_require__.e(/*! import() | views-admin-pages-company-list-list-module */ "views-admin-pages-company-list-list-module").then(__webpack_require__.bind(null, /*! ./../../views/admin-pages/company/list/list.module */ "./src/app/views/admin-pages/company/list/list.module.ts")).then(function (mod) { return mod.ListModule; }); },
+                loadChildren: function () { return Promise.all(/*! import() | views-admin-pages-company-list-list-module */[__webpack_require__.e("common"), __webpack_require__.e("views-admin-pages-company-list-list-module")]).then(__webpack_require__.bind(null, /*! ./../../views/admin-pages/company/list/list.module */ "./src/app/views/admin-pages/company/list/list.module.ts")).then(function (mod) { return mod.ListModule; }); },
                 canActivate: [_shared_ui_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
             },
             {
@@ -565,10 +565,10 @@ var routes = [
         path: '',
         component: _auth_layout_component__WEBPACK_IMPORTED_MODULE_2__["AuthLayoutComponent"],
         children: [
-            {
-                path: 'signin',
-                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-login-login-module */ "views-auth-pages-login-login-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/login/login.module */ "./src/app/views/auth-pages/login/login.module.ts")).then(function (mod) { return mod.LoginModule; }); }
-            },
+            /* {
+              path: 'signin',
+              loadChildren: () => import('./../../views/auth-pages/login/login.module').then(mod => mod.LoginModule)
+            }, */
             {
                 path: 'KlipfolioAccess/:code/:email/:createdt',
                 loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-iframe-access-iframe-access-module */ "views-auth-pages-iframe-access-iframe-access-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/iframe-access/iframe-access.module */ "./src/app/views/auth-pages/iframe-access/iframe-access.module.ts")).then(function (mod) { return mod.IframeAccessModule; }); }
@@ -1234,7 +1234,7 @@ var GlobalService = /** @class */ (function () {
     };
     GlobalService.prototype.getAccess = function (param) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
-        var url = this.baseUrl + "validateUser?email=" + param['email'] + "&createdt=" + param['createdt'];
+        var url = this.baseUrl + "validateUser?email=" + param['email'] + "&createdt=" + param['createdt'] + "&source=" + param['source'];
         return this.http.get(url, { headers: headers });
     };
     GlobalService.prototype.getConfig = function (param) {
@@ -1244,12 +1244,21 @@ var GlobalService = /** @class */ (function () {
     };
     GlobalService.prototype.getCompanies = function (param) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
-        var url = this.baseUrl + "companies";
+        var url = this.baseUrl + "companies?user=" + param['user'];
+        if (param['page']) {
+            url += "&page=" + param['page'];
+        }
+        if (param['limit']) {
+            url += "&limit=" + param['limit'];
+        }
+        if (param['isActive']) {
+            url += "&active=" + param['isActive'];
+        }
         return this.http.get(url, { headers: headers });
     };
     GlobalService.prototype.getUsers = function (param) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
-        var url = this.baseUrl + "users?company=" + param['company'];
+        var url = this.baseUrl + "users?company=" + param['company'] + "&user=" + param['user'];
         if (param['page']) {
             url += "&page=" + param['page'];
         }
@@ -1259,8 +1268,8 @@ var GlobalService = /** @class */ (function () {
         if (param['limit']) {
             url += "&limit=" + param['limit'];
         }
-        if (param['active']) {
-            url += "&active=" + param['active'];
+        if (param['isActive']) {
+            url += "&active=" + param['isActive'];
         }
         if (param['sortOrder']) {
             url += "&sortOrder=" + param['sortOrder'];
@@ -1268,30 +1277,31 @@ var GlobalService = /** @class */ (function () {
         if (param['sort']) {
             url += "&sort=" + param['sort'];
         }
-        var data = this.http.get(url, { headers: headers });
-        console.log(" users data ============= ", data);
-        return data;
+        if (param['search']) {
+            url += "&search=" + param['search'];
+        }
+        return this.http.get(url, { headers: headers });
     };
     GlobalService.prototype.getStatus = function (param) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
         var url = this.baseUrl + "bulkImportStatus?company=" + param['company'] + "&user=" + param['user'];
+        if (param['source']) {
+            url += "&source=" + param['source'];
+        }
+        if (param['status']) {
+            url += "&status=" + param['status'];
+        }
         if (param['page']) {
             url += "&page=" + param['page'];
-        }
-        if (param['group']) {
-            url += "&group=" + param['group'];
         }
         if (param['limit']) {
             url += "&limit=" + param['limit'];
         }
-        if (param['active']) {
-            url += "&active=" + param['active'];
+        if (param['sort']) {
+            url += "&sort=" + param['sort'];
         }
         if (param['sortOrder']) {
             url += "&sortOrder=" + param['sortOrder'];
-        }
-        if (param['sort']) {
-            url += "&sort=" + param['sort'];
         }
         return this.http.get(url, { headers: headers });
     };
@@ -1363,11 +1373,8 @@ var GlobalService = /** @class */ (function () {
     GlobalService.prototype.exportData = function (param) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey, 'Content-Type': 'text/csv' });
         var url = this.baseUrl + "bulkExport?company=" + param['company'] + "&user=" + param['user'];
-        if (param['active']) {
-            url += "&active=" + param['active'];
-        }
-        if (param['sort']) {
-            url += "&sort=" + param['sort'];
+        if (param['isActive']) {
+            url += "&isActive=" + param['isActive'];
         }
         if (param['group']) {
             url += "&group=" + param['group'];

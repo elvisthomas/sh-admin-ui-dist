@@ -117,7 +117,8 @@ var IframeAccessComponent = /** @class */ (function () {
         var postObject = {
             code: code,
             email: email,
-            createdt: createdt
+            createdt: createdt,
+            source: 'Admin Portal'
         };
         postObject.email = 'jdoe@spam.com';
         postObject.email = email;
@@ -139,6 +140,7 @@ var IframeAccessComponent = /** @class */ (function () {
                         company: data.company,
                         config: configDdata
                     };
+                    // userDetails.isSuccessHackerAdmin = 1;
                     _this.jwtService.saveCurrentUser(JSON.stringify(userDetails));
                     if (userDetails.isSuccessHackerAdmin) {
                         _this.router.navigate(['/company/list']);

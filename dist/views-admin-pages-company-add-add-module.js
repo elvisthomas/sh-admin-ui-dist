@@ -143,6 +143,7 @@ var AddComponent = /** @class */ (function () {
             creator: this.currentUser.id,
             groups: this.company.groups,
         };
+        console.log("postData ========= ");
         this.globalService.setLoadingLabel('Inserting... Please Wait.');
         this.spinner.show();
         this.globalService.saveCompany(postData).subscribe(function (data) {
