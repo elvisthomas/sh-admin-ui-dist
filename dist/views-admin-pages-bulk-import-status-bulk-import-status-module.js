@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n\n  <!-- Page Header -->\n  <div class=\"page-header\">\n    <div>\n      <h2 class=\"main-content-title tx-24 mg-b-5\">Bulk Import Status</h2>\n    </div>\n  </div>\n  <!-- End Page Header -->\n\n  <!-- Row -->\n  <div class=\"row sidemenu-height\">\n    <div class=\"col-lg-12\">\n      <div class=\"card custom-card\">\n        <div class=\"card-body\">\n          \n          <!-- SALES TABEL -->\n            <div class=\"col-md-12\">\n              <div class=\"row row-xs align-items-center mg-b-20\">\n                <div class=\"col-md-1\">\n                  <label class=\"mg-b-0\">Company:</label>\n                </div>\n                <div class=\"col-md-5 mg-t-5 mg-md-t-0\">\n                  <select class=\"form-control\" [(ngModel)]=\"importStatusSearch.company\" (change)=\"getStatus();\" *ngIf=\"permission.view\" name=\"company\">\n                    <option value=\"\">Select Company</option>\n                    <option [ngValue]=\"company\" *ngFor=\"let company of companies;\">{{ company?.companyName }}</option>\n                  </select>\n                  <input class=\"form-control\" type=\"text\" [value]=\"importStatusSearch?.company?.companyName\" readonly *ngIf=\"!permission.view\">\n                </div>\n                <div class=\"col-md-6 mg-t-5 mg-md-t-0\">\n                  <div class=\"btn-icon-list\">\n                    <button class=\"btn ripple btn-success btn-icon\" [routerLink]=\"['/company/add']\"><i class=\"fe fe-plus\"></i></button>\n                    <button class=\"btn ripple btn-primary btn-icon\" [routerLink]=\"['/company/list']\"><i class=\"fe fe-list\"></i></button>\n                    <button class=\"btn ripple btn-info btn-icon\" [routerLink]=\"['/company/edit', userSearch?.company?.companyId]\" *ngIf=\"userSearch?.company?.companyId\"><i class=\"fe fe-edit\"></i></button>\n                    <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"getStatus()\"><i class=\"fe fe-refresh-ccw\"></i></button>\n                  </div>\n                </div>\n              </div>\n            </div>\n            \n            <div class=\"col-md-12\">\n              <div class=\"row row-xs align-items-center mg-b-20\">\n                <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\n                  <select class=\"form-control\" [(ngModel)]=\"importStatusSearch.source\" name=\"source\" (change)=\"getStatus();\">\n                    <option value=\"\">Any Source</option>\n                    <option value=\"bulk import\">Bulk Import</option>\n                    <option value=\"portal\">Portal</option>\n                  </select>\n                </div>\n                \n                <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\n                  <select class=\"form-control\" [(ngModel)]=\"importStatusSearch.status\" name=\"status\" (change)=\"getStatus();\">\n                    <option value=\"\">All Status</option>\n                    <option value=\"Complete\">Complete</option>\n                    <option value=\"Error\">Error</option>\n                    <option value=\"Pending\">Pending</option>\n                  </select>\n                </div>\n              </div>\n            </div>\n\n\n          <!-- Row -->\n\t\t\t\t\t<div class=\"row row-sm\" *ngIf=\"!bulkStatus?.length || !importStatusSearch.company\">\n            <div class=\"col-md\">\n              <div class=\"card custom-card card-body text-center\">\n                <p class=\"card-text tx-24\"> {{ !importStatusSearch.company? 'Please select a company first!' : 'No data found!' }}</p>\n              </div>\n            </div>\n          </div>\n          <!-- End Row -->\n\n          <div class=\"table-responsive\" *ngIf=\"bulkStatus?.length\">\n            <table class=\"table table-striped mg-b-0\">\n              <thead class=\"nowrap\">\n                <tr>\n                  <th [class.active]=\"order === 'name'\" (click)=\"setOrder('name')\">\n                    User Name\n                    <span [hidden]=\"reverse\">▼</span>\n                    <span [hidden]=\"!reverse\">▲</span>\n                  </th>\n                  <th>Email Address</th>\n                  <th>Request Date</th>\n                  <th>Requested By</th>\n                  <th>Status</th>\n                  <th>Last Update</th>\n                  <th>Source</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let status of bulkStatus; let i = index;\">\n                  <th>{{ status?.data.firstName + \" \" + status?.data?.lastName }}</th>\n                  <th>{{ status?.data?.emailAddress }}</th>\n                  <th> {{ status?.insertTimestamp | date: 'yyyy-MM-dd' }} </th>\n                  <th>{{ status?.adminUser?.fullName + \" (\" + status?.adminUser.companyName + \")\" }}</th>\n                  <th> {{ status?.status }}</th>\n                  <th> {{ status?.updateTimestamp | date: 'yyyy-MM-dd' }} </th>\n                  <th> {{ status?.source }}</th>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n\n          <div >\n            <div class=\"card-footer pagination-bar text-right pb-0 pt-3\">\n              <h3>{{ pagination?.entries_info }}</h3>\n              <ul *ngIf=\"pagination && pagination?.total_pages\" class=\"pagination justify-content-end\">\n                <li [ngClass]=\"{disabled: !pagination?.prev_page}\" class=\"page-item previous-item\" (click)=\"userSearch.page = pagination?.prev_page; getStatus();\">\n                  <a class=\"page-link\">Previous</a>\n                </li>\n                <li class=\"page-item number-item active\">\n                  <a class=\"page-link\">{{ pagination?.current_page }}</a>\n                </li>\n                <li [ngClass]=\"{disabled: !pagination?.next_page}\" class=\"page-item next-item\" (click)=\"userSearch.page = pagination?.next_page; getStatus();\">\n                  <a class=\"page-link\">Next</a>\n                </li>\n              </ul>\n            </div>\n          </div>\n          <!-- END SALES TABEL -->\n\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- End Row -->\n\n</div>\n\n\n<!-- <pre [innerHtml]=\"pagination | json\"></pre> -->"
+module.exports = "<div class=\"container-fluid\" [hidden]=\"loadingData\">\n\n  <!-- Page Header -->\n  <div class=\"page-header\">\n    <div>\n      <h2 class=\"main-content-title tx-24 mg-b-5\">Bulk Import Status</h2>\n    </div>\n  </div>\n  <!-- End Page Header -->\n\n  <!-- Row -->\n  <div class=\"row sidemenu-height\">\n    <div class=\"col-lg-12\">\n      <div class=\"card custom-card\">\n        <div class=\"card-body\">\n          \n          <!-- SALES TABEL -->\n            <div class=\"col-md-12\">\n              <div class=\"row row-xs align-items-center mg-b-20\">\n                <div class=\"col-md-1\">\n                  <label class=\"mg-b-0\">Company:</label>\n                </div>\n                <div class=\"col-md-5 mg-t-5 mg-md-t-0\">\n                  <select class=\"form-control\" [(ngModel)]=\"importStatusSearch.company\" (change)=\"getStatus();\" *ngIf=\"permission.view\" name=\"company\">\n                    <option value=\"\">Select Company</option>\n                    <option [ngValue]=\"company\" *ngFor=\"let company of companies;\">{{ company?.companyName }}</option>\n                  </select>\n                  <input class=\"form-control\" type=\"text\" [value]=\"importStatusSearch?.company?.companyName\" readonly *ngIf=\"!permission.view\">\n                </div>\n                <div class=\"col-md-6 mg-t-5 mg-md-t-0\">\n                  <div class=\"btn-icon-list\" *ngIf=\"permission.view\">\n                    <button class=\"btn ripple btn-success btn-icon\" [routerLink]=\"['/company/add']\"><i class=\"fe fe-plus\" tooltip=\"Add new company\"></i></button>\n\n                    <button class=\"btn ripple btn-primary btn-icon\" tooltip=\"Company list\" [routerLink]=\"['/company/list']\"><i class=\"fe fe-list\" ></i></button>\n\n                    <button class=\"btn ripple btn-info btn-icon\" [routerLink]=\"['/company/edit', importStatusSearch?.company?.companyId]\" tooltip=\"Edit this company\" [disabled]=\"!importStatusSearch?.company?.companyId\"><i class=\"fe fe-edit\"></i></button>\n\n                    <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"getStatus()\" tooltip=\"Refresh bulk import status list\"><i class=\"fe fe-refresh-ccw\"></i></button>\n                  </div>\n                  <div class=\"btn-icon-list\" *ngIf=\"!permission.view\">\n                    <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"getStatus()\" tooltip=\"Refresh bulk import status list\"><i class=\"fe fe-refresh-ccw\"></i></button>\n                  </div>\n                </div>\n              </div>\n            </div>\n            \n            <div class=\"col-md-12\">\n              <div class=\"row row-xs align-items-center mg-b-20\">\n                <div class=\"col-md-1 mg-t-5 mg-md-t-0\">\n                  Filter:\n                </div>\n                <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\n                  <select class=\"form-control\" [(ngModel)]=\"importStatusSearch.source\" name=\"source\" (change)=\"getStatus();\">\n                    <option value=\"\">Any Source</option>\n                    <option value=\"bulk import\">Bulk Import</option>\n                    <option value=\"portal\">Portal</option>\n                  </select>\n                </div>\n                \n                <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\n                  <select class=\"form-control\" [(ngModel)]=\"importStatusSearch.status\" name=\"status\" (change)=\"getStatus();\">\n                    <option value=\"\">All Status</option>\n                    <option value=\"Complete\">Complete</option>\n                    <option value=\"Error\">Error</option>\n                    <option value=\"Pending\">Pending</option>\n                  </select>\n                </div>\n                <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\n                  <select class=\"form-control page-limit-bar\" [(ngModel)]=\"importStatusSearch.limit\" name=\"limit\" (change)=\"getStatus();\">\n                    <option value=\"\">Limit per page</option>\n                    <option [ngValue]=\"25\">25</option>\n                    <option [ngValue]=\"50\">50</option>\n                    <option [ngValue]=\"100\">100</option>\n                    <option [ngValue]=\"150\">150</option>\n                    <option [ngValue]=\"200\">200</option>\n                  </select>\n                </div>\n              </div>\n            </div>\n\n\n          <!-- Row -->\n\t\t\t\t\t<div class=\"row row-sm\" *ngIf=\"!bulkStatus?.length || !importStatusSearch.company\">\n            <div class=\"col-md\">\n              <div class=\"card custom-card card-body text-center\">\n                <p class=\"card-text tx-24\"> {{ !importStatusSearch.company? 'Please select a company first!' : 'No bulk import status' }}</p>\n              </div>\n            </div>\n          </div>\n          <!-- End Row -->\n\n          <div class=\"table-responsive\" *ngIf=\"bulkStatus?.length\">\n            <table class=\"table table-striped mg-b-0\">\n              <thead class=\"nowrap\">\n                <tr>\n                  <th> User Name </th>\n                  <th>Email Address</th>\n                  <th [class.active]=\"order === 'insertTimestamp'\" (click)=\"setOrder('insertTimestamp')\"> \n                    Request Date\n                    <span [hidden]=\"reverse\">▼</span>\n                    <span [hidden]=\"!reverse\">▲</span>\n                  </th>\n                  <th [class.active]=\"order === 'adminUser'\" (click)=\"setOrder('adminUser')\"> \n                    Requested By\n                    <span [hidden]=\"reverse\">▼</span>\n                    <span [hidden]=\"!reverse\">▲</span>\n                  </th>\n                  <th [class.active]=\"order === 'status'\" (click)=\"setOrder('status')\"> \n                    Status\n                    <span [hidden]=\"reverse\">▼</span>\n                    <span [hidden]=\"!reverse\">▲</span>\n                  </th>\n                  <th [class.active]=\"order === 'updateTimestamp'\" (click)=\"setOrder('updateTimestamp')\"> \n                    Last Update\n                    <span [hidden]=\"reverse\">▼</span>\n                    <span [hidden]=\"!reverse\">▲</span>\n                  </th>\n                  <th>Source</th>\n                </tr>\n              </thead>\n              <tbody>\n                <tr *ngFor=\"let status of bulkStatus; let i = index;\">\n                  <th> {{ status?.data.firstName + \" \" + status?.data?.lastName }}</th>\n                  <th> {{ status?.data?.emailAddress }}</th>\n                  <th> {{ status?.insertTimestamp | date: 'yyyy-MM-dd' }} </th>\n                  <th> {{ status?.adminUser?.fullName + \" (\" + status?.adminUser.company + \")\" }}</th>\n                  <th> {{ status?.status }}</th>\n                  <th> {{ status?.updateTimestamp | date: 'yyyy-MM-dd' }} </th>\n                  <th> {{ status?.source }}</th>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n\n          <div >\n            <div class=\"card-footer pagination-bar text-right pb-0 pt-3\">\n              <h3>{{ pagination?.entries_info }}</h3>\n              <ul *ngIf=\"pagination && pagination?.total_pages\" class=\"pagination justify-content-end\">\n                <li [ngClass]=\"{disabled: !pagination?.prev_page}\" class=\"page-item previous-item\" (click)=\"importStatusSearch.page = pagination?.prev_page; getStatus();\">\n                  <a class=\"page-link\">Previous</a>\n                </li>\n                <li class=\"page-item number-item active\">\n                  <a class=\"page-link\">{{ pagination?.current_page }}</a>\n                </li>\n                <li [ngClass]=\"{disabled: !pagination?.next_page}\" class=\"page-item next-item\" (click)=\"importStatusSearch.page = pagination?.next_page; getStatus();\">\n                  <a class=\"page-link\">Next</a>\n                </li>\n              </ul>\n            </div>\n          </div>\n          <!-- END SALES TABEL -->\n\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- End Row -->\n\n</div>"
 
 /***/ }),
 
@@ -59,7 +59,7 @@ var BulkImportStatusRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2FkbWluLXBhZ2VzL2J1bGstaW1wb3J0LXN0YXR1cy9idWxrLWltcG9ydC1zdGF0dXMuY29tcG9uZW50LnNjc3MifQ== */"
+module.exports = ".page-limit-bar {\n  width: 80px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvYWRtaW4tcGFnZXMvYnVsay1pbXBvcnQtc3RhdHVzL0Q6XFx4YW1wcFxcaHRkb2NzXFxzaC1hZG1pbi11aVxcYW5ndWxhci9zcmNcXGFwcFxcdmlld3NcXGFkbWluLXBhZ2VzXFxidWxrLWltcG9ydC1zdGF0dXNcXGJ1bGstaW1wb3J0LXN0YXR1cy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvdmlld3MvYWRtaW4tcGFnZXMvYnVsay1pbXBvcnQtc3RhdHVzL2J1bGstaW1wb3J0LXN0YXR1cy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL3ZpZXdzL2FkbWluLXBhZ2VzL2J1bGstaW1wb3J0LXN0YXR1cy9idWxrLWltcG9ydC1zdGF0dXMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucGFnZS1saW1pdC1iYXJ7XHJcbiAgd2lkdGg6IDgwcHg7XHJcbn0iLCIucGFnZS1saW1pdC1iYXIge1xuICB3aWR0aDogODBweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -80,6 +80,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_ui_global_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../shared-ui/global.service */ "./src/app/shared-ui/global.service.ts");
 /* harmony import */ var _layouts_home_layout_user_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../layouts/home-layout/user.model */ "./src/app/layouts/home-layout/user.model.ts");
 /* harmony import */ var _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../shared-ui/models/global.model */ "./src/app/shared-ui/models/global.model.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -89,6 +90,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -110,6 +112,9 @@ var BulkImportStatusComponent = /** @class */ (function () {
         this.currentUser = new _layouts_home_layout_user_model__WEBPACK_IMPORTED_MODULE_5__["currentUser"];
         this.importStatusSearch = new _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_6__["ImportStatusSearch"];
         this.companySearch = new _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_6__["CompanySearch"];
+        this.loadingData = false;
+        this.order = 'insertTimestamp';
+        this.reverse = true;
         this.globalService.sendActionChildToParent('bulkimport');
         this.globalService.setLoadingLabel('Loading... Please Wait.');
         this.currentUser = JSON.parse(this.jwtService.getCurrentUser());
@@ -125,31 +130,43 @@ var BulkImportStatusComponent = /** @class */ (function () {
     BulkImportStatusComponent.prototype.ngOnInit = function () {
         this.getCompanies();
     };
+    BulkImportStatusComponent.prototype.setOrder = function (value) {
+        this.order = value;
+        if (this.order === value) {
+            this.importStatusSearch.sortOrder = this.reverse ? "DESC" : "ASC";
+            this.importStatusSearch.sort = value;
+            this.reverse = !this.reverse;
+            this.getStatus();
+        }
+    };
     BulkImportStatusComponent.prototype.getCompanies = function () {
         var _this = this;
-        this.companies = [];
-        this.spinner.show();
-        this.globalService.getCompanies({ user: this.companySearch.user }).subscribe(function (data) {
-            _this.spinner.hide();
-            if (Object.keys(data).length) {
-                _this.companies = data.items;
-                var found = _this.companies.filter(function (e) { return e.companyId == _this.currentUser['company'].companyId; });
-                if (!_this.currentUser['isSuccessHackerAdmin']) {
-                    _this.importStatusSearch.company = found[0];
+        if (!this.currentUser['isSuccessHackerAdmin']) {
+            this.importStatusSearch.company = this.currentUser['company'];
+        }
+        else {
+            this.companies = [];
+            this.spinner.show();
+            this.loadingData = true;
+            this.globalService.getCompanies({ user: this.companySearch.user }).subscribe(function (data) {
+                if (Object.keys(data).length) {
+                    _this.companies = data.items;
+                    var found = _this.companies.filter(function (e) { return e.companyId == _this.currentUser['company'].companyId; });
+                    if (_this.currentUser['company']) {
+                        _this.importStatusSearch.company = found[0];
+                        _this.getStatus();
+                    }
                 }
-                if (_this.currentUser['company']) {
-                    _this.importStatusSearch.company = found[0];
-                    _this.getStatus();
-                }
-            }
-        }, function (error) {
-            _this.spinner.hide();
-            _this.toastr.error('There are some server error! Please check connection.', 'Error');
-        });
+                _this.spinner.hide();
+            }, function (error) {
+                _this.spinner.hide();
+                _this.loadingData = false;
+                _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].reponseCode[error.status], 'Error');
+            });
+        }
     };
     BulkImportStatusComponent.prototype.getStatus = function () {
         var _this = this;
-        this.spinner.show();
         var postData = {
             company: this.importStatusSearch.company.companyId,
             user: this.currentUser.id,
@@ -160,15 +177,20 @@ var BulkImportStatusComponent = /** @class */ (function () {
             sort: this.importStatusSearch.sort,
             sortOrder: this.importStatusSearch.sortOrder
         };
+        console.log("postData ======= ", postData);
+        this.spinner.show();
         this.globalService.getStatus(postData).subscribe(function (data) {
-            _this.spinner.hide();
-            if (Object.keys(data).length) {
+            console.log("data ======= ", data);
+            _this.loadingData = false;
+            if (data && Object.keys(data).length) {
                 _this.bulkStatus = data.items;
-                _this.pagination = data.meta;
+                _this.pagination = data.meta.pagination;
             }
+            _this.spinner.hide();
         }, function (error) {
             _this.spinner.hide();
-            _this.toastr.error('There are some server error! Please check connection.', 'Error');
+            _this.loadingData = false;
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].reponseCode[error.status], 'Error');
         });
     };
     BulkImportStatusComponent.ctorParameters = function () { return [
@@ -210,12 +232,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bulk_import_status_routing_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bulk-import-status-routing.module */ "./src/app/views/admin-pages/bulk-import-status/bulk-import-status-routing.module.ts");
 /* harmony import */ var _bulk_import_status_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bulk-import-status.component */ "./src/app/views/admin-pages/bulk-import-status/bulk-import-status.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -230,7 +254,8 @@ var BulkImportStatusModule = /** @class */ (function () {
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _bulk_import_status_routing_module__WEBPACK_IMPORTED_MODULE_2__["BulkImportStatusRoutingModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__["TooltipModule"].forRoot()
             ]
         })
     ], BulkImportStatusModule);

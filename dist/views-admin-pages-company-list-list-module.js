@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" *ngIf=\"!currentUser?.isSuccessHackerAdmin\">\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-md-12 text-center mt-20 not-access\">\r\n      <h3> Oops Sorry! You are not a authorized user for accessing this screen. </h3>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"currentUser?.isSuccessHackerAdmin\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">Companies</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <!-- SALES TABEL -->\r\n          <div class=\"col-md-12\">\r\n            <h6 class=\"card-title mb-1 d-flex\"><span class=\"pt-2\">Companies:</span> &nbsp;&nbsp;&nbsp;\r\n              <button class=\"btn ripple btn-success btn-icon\" [routerLink]=\"['/company/add']\" ><i class=\"fe fe-plus\"></i></button>&nbsp;\r\n              <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"showDeleteModal('all', '')\" *ngIf=\"selectedCompany?.length\"><i class=\"fe fe-x\"></i></button>\r\n              <!-- <button class=\"btn ripple btn-info btn-icon\"><i class=\"far fa-edit\"></i></button> -->\r\n            </h6>\r\n          </div>\r\n\r\n          <div class=\"col-md-12\">\r\n            <div class=\"row row-xs align-items-center mg-b-20\">\r\n              <div class=\"col-md-1\">\r\n                <label class=\"mg-b-0\">Filter:</label>\r\n              </div>\r\n              \r\n              <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\r\n                <select class=\"form-control\" [(ngModel)]=\"companySearch.isActive\" name=\"isActive\" (change)=\"getCompanies();\">\r\n                  <option value=\"\">All Users</option>\r\n                  <option value=\"1\">Active</option>\r\n                  <option value=\"0\">inactive</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\r\n                <select class=\"form-control\" [(ngModel)]=\"companySearch.limit\" name=\"limit\" (change)=\"getCompanies();\">\r\n                  <option value=\"\">Limit per page</option>\r\n                  <option [ngValue]=\"25\">25</option>\r\n                  <option [ngValue]=\"50\">50</option>\r\n                  <option [ngValue]=\"100\">100</option>\r\n                  <option [ngValue]=\"150\">150</option>\r\n                  <option [ngValue]=\"200\">200</option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          \r\n          <!-- Row -->\r\n\t\t\t\t\t<div class=\"row row-sm\" *ngIf=\"!companies?.length\">\r\n            <div class=\"col-md\">\r\n              <div class=\"card custom-card card-body text-center\">\r\n                <p class=\"card-text tx-24\">No data found!</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!-- End Row -->\r\n\r\n          <div class=\"table-responsive\" *ngIf=\"companies?.length\">\r\n            <table class=\"table table-striped mg-b-0\">\r\n              <thead class=\"nowrap\">\r\n                <tr>\r\n                  <th> <input type=\"checkbox\" [(ngModel)]=\"multiSelect\" name=\"multiSelect\" (click)=\"multiSelectCompany(multiSelect)\"/> </th>\r\n                  <th> Name </th>\r\n                  <th> Active </th>\r\n                  <th> Created By </th>\r\n                  <th> Date Created </th>\r\n                  <th> # Of Users </th>\r\n                  <th> Action </th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr *ngFor=\"let company of companies; let i = index;\">\r\n                  <th> <input type=\"checkbox\" [(ngModel)]=\"company.added\" value=\"{{ company?.companyId }}\" (change)=\"selectCompany(company)\" *ngIf=\"company?.isActive\"/> </th>\r\n                  <th> {{ company?.companyName }} </th>\r\n                  <th [ngClass]=\"{'text-danger': company?.isActive == 0, 'text-primary': company?.isActive == 1 }\"> {{ company?.isActive ? 'Active' : 'Inactive' }} </th>\r\n                  <th> {{ company?.createdBy?.fullName }}</th>\r\n                  <th> {{ company?.createDate | date: 'yyyy-MM-dd' }} </th>\r\n                  <th> {{ company?.userCount }} </th>\r\n                  <th>\r\n                    <div class=\"btn-icon-list\">\r\n                      <button class=\"btn ripple btn-secondary btn-icon\" *ngIf=\"company?.isActive\" (click)=\"showDeleteModal('single', company)\"><i class=\"fe fe-x\"></i></button>\r\n                      <button class=\"btn ripple btn-info btn-icon\" [routerLink]=\"['/company/edit', company?.companyId]\"><i class=\"far fa-edit\"></i></button>\r\n                    </div>\r\n                  </th>\r\n                </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n\r\n          <div>\r\n            <div class=\"card-footer pagination-bar text-right pb-0 pt-3\">\r\n              <h3>{{ pagination?.entries_info }}</h3>\r\n              <ul *ngIf=\"pagination && pagination?.total_pages\" class=\"pagination justify-content-end\">\r\n                <li [ngClass]=\"{disabled: !pagination?.prev_page}\" class=\"page-item previous-item\" (click)=\"companySearch.page = pagination?.prev_page; getCompanies();\">\r\n                  <a class=\"page-link\">Previous</a>\r\n                </li>\r\n                <li class=\"page-item number-item active\">\r\n                  <a class=\"page-link\">{{ pagination?.current_page }}</a>\r\n                </li>\r\n                <li [ngClass]=\"{disabled: !pagination?.next_page}\" class=\"page-item next-item\" (click)=\"companySearch.page = pagination?.next_page; getCompanies();\">\r\n                  <a class=\"page-link\">Next</a>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #deleteCompanyModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fe fe-x\"></i> Inactive Company</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"deleteCompanyModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure want to inactive selected companies?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"deleteCompanyModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"deleteCompany()\" *ngIf=\"companyDeleteOption == 'single'\">Inactive</button>\r\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"deleteAllCompany()\" *ngIf=\"companyDeleteOption == 'all'\">Inactive</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<!-- <pre [innerHtml]=\"companies | json\"></pre> -->\r\n    "
+module.exports = "<div class=\"container-fluid\" *ngIf=\"!currentUser?.isSuccessHackerAdmin\">\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-md-12 text-center mt-20 not-access\">\r\n      <h3> Oops Sorry! You are not a authorized user for accessing this screen. </h3>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"currentUser?.isSuccessHackerAdmin && !loadingData\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">Companies</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <!-- SALES TABEL -->\r\n          <div class=\"col-md-12\">\r\n            <h6 class=\"card-title mb-1 d-flex\"><span class=\"pt-2\">Companies:</span> &nbsp;&nbsp;&nbsp;\r\n              <button class=\"btn ripple btn-success btn-icon\" [routerLink]=\"['/company/add']\" tooltip=\"Add new company\"><i class=\"fe fe-plus\"></i></button>&nbsp;\r\n              <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"showDeleteModal('all', '')\" [disabled]=\"!selectedCompany?.length\" tooltip=\"Inactivate selected companies\"><i class=\"fe fe-x\"></i></button>\r\n              <!-- <button class=\"btn ripple btn-info btn-icon\"><i class=\"far fa-edit\"></i></button> -->\r\n            </h6>\r\n          </div>\r\n\r\n          <div class=\"col-md-12\">\r\n            <div class=\"row row-xs align-items-center mg-b-20\">\r\n              <div class=\"col-md-1\">\r\n                <label class=\"mg-b-0\">Filter:</label>\r\n              </div>\r\n              \r\n              <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\r\n                <select class=\"form-control\" [(ngModel)]=\"companySearch.isActive\" name=\"isActive\" (change)=\"getCompanies();\">\r\n                  <option value=\"\">All Companies</option>\r\n                  <option value=\"1\">Active</option>\r\n                  <option value=\"0\">Inactive</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"col-md-2 mg-t-5 mg-md-t-0\">\r\n                <select class=\"form-control page-limit-bar\" [(ngModel)]=\"companySearch.limit\" name=\"limit\" (change)=\"getCompanies();\">\r\n                  <option value=\"\">Limit per page</option>\r\n                  <option [ngValue]=\"25\">25</option>\r\n                  <option [ngValue]=\"50\">50</option>\r\n                  <option [ngValue]=\"100\">100</option>\r\n                  <option [ngValue]=\"150\">150</option>\r\n                  <option [ngValue]=\"200\">200</option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          \r\n          <!-- Row -->\r\n\t\t\t\t\t<div class=\"row row-sm\" *ngIf=\"!companies?.length\">\r\n            <div class=\"col-md\">\r\n              <div class=\"card custom-card card-body text-center\">\r\n                <p class=\"card-text tx-24\">No Companies</p>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!-- End Row -->\r\n\r\n          <div class=\"table-responsive\" *ngIf=\"companies?.length\">\r\n            <table class=\"table table-striped mg-b-0\">\r\n              <thead class=\"nowrap\">\r\n                <tr>\r\n                  <th> <input type=\"checkbox\" [(ngModel)]=\"multiSelect\" name=\"multiSelect\" (click)=\"multiSelectCompany(multiSelect)\"/> </th>\r\n                  <th [class.active]=\"order === 'companyName'\" (click)=\"setOrder('companyName')\"> \r\n                    Name\r\n                    <span [hidden]=\"reverse\">▼</span>\r\n                    <span [hidden]=\"!reverse\">▲</span>\r\n                  </th>\r\n                  <th> Active </th>\r\n                  <th [class.active]=\"order === 'createdByUserId'\" (click)=\"setOrder('createdByUserId')\"> \r\n                    Created By\r\n                    <span [hidden]=\"reverse\">▼</span>\r\n                    <span [hidden]=\"!reverse\">▲</span>\r\n                  </th>\r\n                  <th [class.active]=\"order === 'createDate'\" (click)=\"setOrder('createDate')\"> \r\n                    Date Created\r\n                    <span [hidden]=\"reverse\">▼</span>\r\n                    <span [hidden]=\"!reverse\">▲</span>\r\n                  </th>\r\n                  <th [class.active]=\"order === 'modifiedByUserId'\" (click)=\"setOrder('modifiedByUserId')\"> \r\n                    Modified By\r\n                    <span [hidden]=\"reverse\">▼</span>\r\n                    <span [hidden]=\"!reverse\">▲</span>\r\n                  </th>\r\n                  <th [class.active]=\"order === 'modifiedDate'\" (click)=\"setOrder('modifiedDate')\"> \r\n                    Date Modified\r\n                    <span [hidden]=\"reverse\">▼</span>\r\n                    <span [hidden]=\"!reverse\">▲</span>\r\n                  </th>\r\n                  <th> # Of Users </th>\r\n                  <th> Action </th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr *ngFor=\"let company of companies; let i = index;\">\r\n                  <th> <input type=\"checkbox\" [(ngModel)]=\"company.added\" value=\"{{ company?.companyId }}\" (change)=\"selectCompany(company)\" [disabled]=\"!company.isActive\"/> </th>\r\n                  <th> <a [routerLink]=\"['/user/list', company?.companyId]\">{{ company?.companyName }} </a> </th>\r\n                  <th> {{ company?.isActive ? 'Active' : 'Inactive' }} </th>\r\n                  <th> {{ company?.createdBy?.fullName }}</th>\r\n                  <th> {{ company?.createDate | date: 'yyyy-MM-dd' }} </th>\r\n                  <th> {{ company?.modifiedBy?.fullName }}</th>\r\n                  <th> {{ company?.modifiedDate | date: 'yyyy-MM-dd' }} </th>\r\n                  <th> {{ company?.userCount }} </th>\r\n                  <th>\r\n                    <div class=\"btn-icon-list\">\r\n                      <button class=\"btn ripple btn-info btn-icon\" [routerLink]=\"['/company/edit', company?.companyId]\" tooltip=\"Edit this company\"><i class=\"far fa-edit\"></i></button>\r\n                      <button class=\"btn ripple btn-secondary btn-icon\" [disabled]=\"!company.isActive\" (click)=\"showDeleteModal('single', company)\" tooltip=\"Inactivate this company\"><i class=\"fe fe-x\"></i></button>\r\n                    </div>\r\n                  </th>\r\n                </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n\r\n          <div>\r\n            <div class=\"card-footer pagination-bar text-right pb-0 pt-3\">\r\n              <h3>{{ pagination?.entries_info }}</h3>\r\n              <ul *ngIf=\"pagination && pagination?.total_pages\" class=\"pagination justify-content-end\">\r\n                <li [ngClass]=\"{disabled: !pagination?.prev_page}\" class=\"page-item previous-item\" (click)=\"companySearch.page = pagination?.prev_page; getCompanies();\">\r\n                  <a class=\"page-link\">Previous</a>\r\n                </li>\r\n                <li class=\"page-item number-item active\">\r\n                  <a class=\"page-link\">{{ pagination?.current_page }}</a>\r\n                </li>\r\n                <li [ngClass]=\"{disabled: !pagination?.next_page}\" class=\"page-item next-item\" (click)=\"companySearch.page = pagination?.next_page; getCompanies();\">\r\n                  <a class=\"page-link\">Next</a>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #deleteCompanyModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fe fe-x\"></i> Inactivate Company</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"deleteCompanyModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <p>Are you sure want to inactivate selected companies?</p>\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"deleteCompanyModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"deleteCompany()\" *ngIf=\"companyDeleteOption == 'single'\">Inactivate</button>\r\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"deleteAllCompany()\" *ngIf=\"companyDeleteOption == 'all'\">Inactivate</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n\r\n<!-- <pre [innerHtml]=\"companies | json\"></pre> -->\r\n    "
 
 /***/ }),
 
@@ -59,7 +59,7 @@ var ListRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".not-access {\n  margin-top: 7rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvYWRtaW4tcGFnZXMvY29tcGFueS9saXN0L0Q6XFx4YW1wcFxcaHRkb2NzXFxzaC1hZG1pbi11aVxcYW5ndWxhci9zcmNcXGFwcFxcdmlld3NcXGFkbWluLXBhZ2VzXFxjb21wYW55XFxsaXN0XFxsaXN0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC92aWV3cy9hZG1pbi1wYWdlcy9jb21wYW55L2xpc3QvbGlzdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGdCQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC92aWV3cy9hZG1pbi1wYWdlcy9jb21wYW55L2xpc3QvbGlzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ub3QtYWNjZXNze1xyXG4gIG1hcmdpbi10b3A6IDdyZW07XHJcbn0iLCIubm90LWFjY2VzcyB7XG4gIG1hcmdpbi10b3A6IDdyZW07XG59Il19 */"
+module.exports = ".not-access {\n  margin-top: 7rem;\n}\n\n.page-limit-bar {\n  width: 80px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvYWRtaW4tcGFnZXMvY29tcGFueS9saXN0L0Q6XFx4YW1wcFxcaHRkb2NzXFxzaC1hZG1pbi11aVxcYW5ndWxhci9zcmNcXGFwcFxcdmlld3NcXGFkbWluLXBhZ2VzXFxjb21wYW55XFxsaXN0XFxsaXN0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC92aWV3cy9hZG1pbi1wYWdlcy9jb21wYW55L2xpc3QvbGlzdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGdCQUFBO0FDQ0Y7O0FEQ0E7RUFDRSxXQUFBO0FDRUYiLCJmaWxlIjoic3JjL2FwcC92aWV3cy9hZG1pbi1wYWdlcy9jb21wYW55L2xpc3QvbGlzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ub3QtYWNjZXNze1xyXG4gIG1hcmdpbi10b3A6IDdyZW07XHJcbn1cclxuLnBhZ2UtbGltaXQtYmFye1xyXG4gIHdpZHRoOiA4MHB4O1xyXG59IiwiLm5vdC1hY2Nlc3Mge1xuICBtYXJnaW4tdG9wOiA3cmVtO1xufVxuXG4ucGFnZS1saW1pdC1iYXIge1xuICB3aWR0aDogODBweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -81,6 +81,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_home_layout_user_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../layouts/home-layout/user.model */ "./src/app/layouts/home-layout/user.model.ts");
 /* harmony import */ var _shared_ui_jwt_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../shared-ui/jwt.service */ "./src/app/shared-ui/jwt.service.ts");
 /* harmony import */ var _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../shared-ui/models/global.model */ "./src/app/shared-ui/models/global.model.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -90,6 +91,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -109,22 +111,39 @@ var ListComponent = /** @class */ (function () {
         this.selectedCompany = [];
         this.companyDeleteOption = 'single';
         this.companySearch = new _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_7__["CompanySearch"];
+        this.loadingData = false;
+        this.order = 'companyName';
+        this.reverse = true;
         this.globalService.setLoadingLabel('Loading... Please Wait.');
         this.currentUser = JSON.parse(this.jwtService.getCurrentUser());
         this.globalService.sendActionChildToParent('companies');
         this.companySearch.user = this.currentUser.id;
-        console.log("this.currentUser ========= ", this.currentUser);
     }
+    ListComponent.prototype.setOrder = function (value) {
+        this.order = value;
+        if (this.order === value) {
+            this.companySearch.sortOrder = this.reverse ? "DESC" : "ASC";
+            this.companySearch.sort = value;
+            this.reverse = !this.reverse;
+            this.getCompanies();
+        }
+    };
     ListComponent.prototype.ngOnInit = function () {
         this.getCompanies();
     };
+    ListComponent.prototype.setCompanyObject = function (company) {
+        this.globalService.setCompanyObject(company);
+    };
     ListComponent.prototype.getCompanies = function () {
         var _this = this;
+        this.loadingData = true;
         this.spinner.show();
         var postObject = {
             page: this.companySearch.page,
             limit: this.companySearch.limit,
             user: this.companySearch.user,
+            sort: this.companySearch.sort,
+            sortOrder: this.companySearch.sortOrder,
         };
         if (this.companySearch.isActive) {
             postObject['isActive'] = Number(this.companySearch.isActive);
@@ -135,8 +154,11 @@ var ListComponent = /** @class */ (function () {
                 _this.companies = data.items;
                 _this.pagination = data.meta.pagination;
             }
+            _this.loadingData = false;
         }, function (error) {
-            _this.toastr.error('Error', 'There are some server error! Please check connection.');
+            _this.spinner.hide();
+            _this.loadingData = false;
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].reponseCode[error.status], 'Error');
         });
     };
     ListComponent.prototype.showDeleteModal = function (type, company) {
@@ -185,6 +207,10 @@ var ListComponent = /** @class */ (function () {
                 _this.toastr.error("There are some error while updating the data!", "Error");
             }
             _this.deleteCompanyModal.hide();
+        }, function (error) {
+            _this.spinner.hide();
+            _this.deleteCompanyModal.hide();
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].reponseCode[error.status], 'Error');
         });
     };
     ListComponent.prototype.deleteAllCompany = function () {
@@ -202,8 +228,13 @@ var ListComponent = /** @class */ (function () {
                     _this.spinner.hide();
                     _this.deleteCompanyModal.hide();
                     _this.getCompanies();
+                    _this.toastr.success("Data updated successfully.", "Success");
                 }
             });
+        }, function (error) {
+            _this.spinner.hide();
+            _this.deleteCompanyModal.hide();
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].reponseCode[error.status], 'Error');
         });
     };
     ListComponent.ctorParameters = function () { return [
@@ -249,13 +280,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _list_routing_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./list-routing.module */ "./src/app/views/admin-pages/company/list/list-routing.module.ts");
 /* harmony import */ var _list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./list.component */ "./src/app/views/admin-pages/company/list/list.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
+/* harmony import */ var ngx_bootstrap_tooltip__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap/tooltip */ "./node_modules/ngx-bootstrap/tooltip/fesm5/ngx-bootstrap-tooltip.js");
+/* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -272,7 +305,8 @@ var ListModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _list_routing_module__WEBPACK_IMPORTED_MODULE_2__["ListRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__["ModalModule"].forRoot()
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_6__["ModalModule"].forRoot(),
+                ngx_bootstrap_tooltip__WEBPACK_IMPORTED_MODULE_5__["TooltipModule"].forRoot()
             ]
         })
     ], ListModule);

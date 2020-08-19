@@ -69,7 +69,8 @@
 	margin:0 auto;
 }
 .side-menu .header-brand-img{
-	margin-top:0;
+	margin-top: 15px;
+    margin-bottom: 11px;
 }
 .main-sidebar-body{
 	border-top: 1px solid  #e1e6f1;

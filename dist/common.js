@@ -35,6 +35,8 @@ var CompanySearch = /** @class */ (function () {
         this.page = 1;
         this.limit = 25;
         this.isActive = "";
+        this.sort = "companyName";
+        this.sortOrder = "ASC";
     }
     return CompanySearch;
 }());
@@ -44,12 +46,12 @@ var UserSearch = /** @class */ (function () {
         this.page = 1;
         this.limit = 25;
         this.company = "";
+        this.user = "";
         this.isActive = "";
         this.group = "";
         this.search = "";
         this.sort = "lastName";
         this.sortOrder = 'ASC';
-        this.user = "";
     }
     return UserSearch;
 }());
@@ -62,7 +64,7 @@ var ImportStatusSearch = /** @class */ (function () {
         this.status = "";
         this.page = 1;
         this.limit = 25;
-        this.sort = "";
+        this.sort = "insertTimestamp";
         this.sortOrder = 'ASC';
     }
     return ImportStatusSearch;

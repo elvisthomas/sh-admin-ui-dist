@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">{{ company?.companyId ? 'Edit' : 'Add' }} Company</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !company.companyName, 'text-primary': company.companyName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" [(ngModel)]=\"company.companyName\" placeholder=\"Enter Company Name\" type=\"text\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"company.isActive\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"company?.companyId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Created By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.createdBy?.fullName }} | {{ company?.createDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"company?.companyId && company?.modifiedBy\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Modified By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.modifiedBy?.fullName }} | {{ company?.modifiedDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active Users:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\" *ngIf=\"company?.userCount\">\r\n                  ___ / {{ company?.userCount }}\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\" *ngIf=\"!company?.userCount\">\r\n                  No users\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-12 mg-b-20\">\r\n                  <div class=\"btn-icon-list\">\r\n                    Groups: &nbsp;&nbsp;\r\n                    <button class=\"btn ripple btn-secondary btn-icon pull-right\" (click)=\"deleteGroup()\" *ngIf=\"selectedGroups?.length\"><i class=\"fe fe-trash\"></i></button>\r\n                    <button class=\"btn ripple btn-success btn-icon pull-right\" (click)=\"showAddGroupModal()\"><i class=\"fe fe-plus\"></i></button>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"company?.groups?.length\">\r\n                  <p *ngFor=\"let group of company.groups\" class=\"group-list\">\r\n                    <label> <input type=\"checkbox\" (change)=\"selectGroup(group)\" /> {{ group }} </label>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            \r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n              <div class=\"form-group row justify-content-end mb-0\">\r\n                <div class=\"col-md-12\">\r\n                  <button class=\"btn ripple btn-light pd-x-30 pull-right\" [routerLink]=\"['/company/list']\">Cancel</button>&nbsp;&nbsp;\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" [disabled]=\"!company?.companyName\" (click)=\"saveCompany()\" *ngIf=\"!company?.companyId\">Save</button>\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" [disabled]=\"!company?.companyName\" (click)=\"updateCompany()\" *ngIf=\"company?.companyId\">Edit</button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #addGroupModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fa fa-plus\"></i> Add Group</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"addGroupModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Enter Group Name\" />\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"addGroupModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addGroup()\" [disabled]=\"!addedGroup\">Add</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- <pre [innerHtml]=\"company | json\"></pre> -->"
+module.exports = "<div class=\"container-fluid\" [hidden]=\"loadingData\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">{{ company?.companyId ? 'Edit' : 'Add' }} Company</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !company.companyName, 'text-primary': company.companyName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" [(ngModel)]=\"company.companyName\" placeholder=\"Enter Company Name\" type=\"text\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"company.isActive\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"company?.companyId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Created By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.createdBy?.fullName }} | {{ company?.createDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"company?.companyId && company?.modifiedBy\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Modified By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.modifiedBy?.fullName }} | {{ company?.modifiedDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active Users:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\" *ngIf=\"company?.userCount\">\r\n                  ___ / {{ company?.userCount }}\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\" *ngIf=\"!company?.userCount\">\r\n                  No users\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-12 mg-b-20\">\r\n                  <div class=\"btn-icon-list\">\r\n                    Groups:\r\n                  </div>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-8 input-group\">\r\n                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Add new group\"/>\r\n                      <span class=\"input-group-btn\">\r\n                        <button class=\"btn ripple btn-success btn-icon\" [disabled]=\"!addedGroup\" (click)=\"addGroup()\" tooltip=\"Add this group\"><i class=\"fe fe-plus\" ></i></button>\r\n                      </span>\r\n                      <span class=\"input-group-btn\">\r\n                        <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"deleteGroup()\" [disabled]=\"!groupForRemove.length\" tooltip=\"Delete selected groups\"><i class=\"fe fe-trash\"></i></button>\r\n                      </span>\r\n                    </div>\r\n                  </div>  \r\n                </div>\r\n                <div *ngIf=\"selectedGroups?.length\">\r\n                  <table class=\"table mg-b-0\">\r\n                    <thead>\r\n                      <tr>\r\n                        <th>\r\n                          <input type=\"checkbox\" [(ngModel)]=\"multiSelect\" name=\"multiSelect\" (click)=\"multiSelectGroup(multiSelect)\"/>\r\n                        </th>\r\n                        <th>Name</th>\r\n                      </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                      <tr *ngFor=\"let group of selectedGroups; let i = index;\">\r\n                        <td><input type=\"checkbox\" (change)=\"selectGroup(group)\" [(ngModel)]=\"group.added\" [disabled]=\"group.removed\" name=\"group{{i}}\"/></td>\r\n                        <td><label [ngClass]=\"{'text-crossed': group.removed}\">  {{ group?.name }} </label></td>\r\n                      </tr>\r\n                    </tbody>\r\n                  </table>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            \r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n              <div class=\"form-group row justify-content-end mb-0\">\r\n                <div class=\"col-md-12\">\r\n                  <button class=\"btn ripple btn-light pd-x-30 pull-right\" [routerLink]=\"['/company/list']\">Cancel</button>&nbsp;&nbsp;\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" [disabled]=\"!company?.companyName\" (click)=\"saveCompany()\" *ngIf=\"!company?.companyId\">Save</button>\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" [disabled]=\"!company?.companyName\" (click)=\"updateCompany()\" *ngIf=\"company?.companyId\">Save</button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #addGroupModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fa fa-plus\"></i> Add Group</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"addGroupModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Enter Group Name\" />\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"addGroupModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addGroup()\" [disabled]=\"!addedGroup\">Add</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- <pre [innerHtml]=\"company | json\"></pre> -->"
 
 /***/ }),
 
@@ -59,7 +59,7 @@ var AddRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".toggle-switch {\n  height: 26px;\n  width: 52px;\n  display: inline-block;\n  position: relative;\n}\n.toggle-switch input {\n  display: none;\n}\n.toggle-switch input:checked + .slider {\n  background-color: #03c895;\n  border-radius: 50px;\n}\n.toggle-switch input:checked + .slider::after {\n  -webkit-transform: translateX(26px);\n  transform: translateX(26px);\n}\n.toggle-switch .slider {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: grey;\n  border-radius: 50px;\n}\n.toggle-switch .slider::after {\n  position: absolute;\n  content: \"\";\n  height: 18px;\n  width: 18px;\n  background-color: white;\n  left: 4px;\n  bottom: 4px;\n  border-radius: 50px;\n}\n.group-list {\n  margin-bottom: 0rem;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvYWRtaW4tcGFnZXMvY29tcGFueS9hZGQvRDpcXHhhbXBwXFxodGRvY3NcXHNoLWFkbWluLXVpXFxhbmd1bGFyL3NyY1xcYXBwXFx2aWV3c1xcYWRtaW4tcGFnZXNcXGNvbXBhbnlcXGFkZFxcYWRkLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC92aWV3cy9hZG1pbi1wYWdlcy9jb21wYW55L2FkZC9hZGQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFBO0VBQ0EsV0FBQTtFQUNBLHFCQUFBO0VBQ0Esa0JBQUE7QUNDRjtBREFFO0VBQ0UsYUFBQTtBQ0VKO0FEREk7RUFDRSx5QkFBQTtFQUNBLG1CQUFBO0FDR047QURESTtFQUNFLG1DQUFBO0VBRUEsMkJBQUE7QUNHTjtBREFFO0VBQ0Usa0JBQUE7RUFDQSxPQUFBO0VBQ0EsTUFBQTtFQUNBLFFBQUE7RUFDQSxTQUFBO0VBQ0Esc0JBQUE7RUFDQSxtQkFBQTtBQ0VKO0FEREk7RUFDRSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsV0FBQTtFQUNBLHVCQUFBO0VBQ0EsU0FBQTtFQUNBLFdBQUE7RUFDQSxtQkFBQTtBQ0dOO0FERUE7RUFDRSxtQkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvdmlld3MvYWRtaW4tcGFnZXMvY29tcGFueS9hZGQvYWRkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRvZ2dsZS1zd2l0Y2gge1xyXG4gIGhlaWdodDogMjZweDtcclxuICB3aWR0aDogNTJweDtcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIGlucHV0IHtcclxuICAgIGRpc3BsYXk6IG5vbmU7XHJcbiAgICAmOmNoZWNrZWQgKyAuc2xpZGVyIHtcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzAzYzg5NTtcclxuICAgICAgYm9yZGVyLXJhZGl1czogNTBweDtcclxuICAgIH1cclxuICAgICY6Y2hlY2tlZCArIC5zbGlkZXI6OmFmdGVyIHtcclxuICAgICAgLXdlYmtpdC10cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMjZweCk7XHJcbiAgICAgIC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMjZweCk7XHJcbiAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgyNnB4KTtcclxuICAgIH1cclxuICB9XHJcbiAgLnNsaWRlciB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBsZWZ0OiAwO1xyXG4gICAgdG9wOiAwO1xyXG4gICAgcmlnaHQ6IDA7XHJcbiAgICBib3R0b206IDA7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBncmV5O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNTBweDtcclxuICAgICY6OmFmdGVyIHtcclxuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgICBjb250ZW50OiAnJztcclxuICAgICAgaGVpZ2h0OiAxOHB4O1xyXG4gICAgICB3aWR0aDogMThweDtcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgICAgIGxlZnQ6IDRweDtcclxuICAgICAgYm90dG9tOiA0cHg7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6IDUwcHg7XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxyXG4uZ3JvdXAtbGlzdHtcclxuICBtYXJnaW4tYm90dG9tOiAwcmVtO1xyXG59IiwiLnRvZ2dsZS1zd2l0Y2gge1xuICBoZWlnaHQ6IDI2cHg7XG4gIHdpZHRoOiA1MnB4O1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbi50b2dnbGUtc3dpdGNoIGlucHV0IHtcbiAgZGlzcGxheTogbm9uZTtcbn1cbi50b2dnbGUtc3dpdGNoIGlucHV0OmNoZWNrZWQgKyAuc2xpZGVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzAzYzg5NTtcbiAgYm9yZGVyLXJhZGl1czogNTBweDtcbn1cbi50b2dnbGUtc3dpdGNoIGlucHV0OmNoZWNrZWQgKyAuc2xpZGVyOjphZnRlciB7XG4gIC13ZWJraXQtdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDI2cHgpO1xuICAtbXMtdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDI2cHgpO1xuICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMjZweCk7XG59XG4udG9nZ2xlLXN3aXRjaCAuc2xpZGVyIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBib3R0b206IDA7XG4gIGJhY2tncm91bmQtY29sb3I6IGdyZXk7XG4gIGJvcmRlci1yYWRpdXM6IDUwcHg7XG59XG4udG9nZ2xlLXN3aXRjaCAuc2xpZGVyOjphZnRlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgY29udGVudDogXCJcIjtcbiAgaGVpZ2h0OiAxOHB4O1xuICB3aWR0aDogMThweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIGxlZnQ6IDRweDtcbiAgYm90dG9tOiA0cHg7XG4gIGJvcmRlci1yYWRpdXM6IDUwcHg7XG59XG5cbi5ncm91cC1saXN0IHtcbiAgbWFyZ2luLWJvdHRvbTogMHJlbTtcbn0iXX0= */"
+module.exports = ".toggle-switch {\n  height: 26px;\n  width: 52px;\n  display: inline-block;\n  position: relative;\n}\n.toggle-switch input {\n  display: none;\n}\n.toggle-switch input:checked + .slider {\n  background-color: #03c895;\n  border-radius: 50px;\n}\n.toggle-switch input:checked + .slider::after {\n  -webkit-transform: translateX(26px);\n  transform: translateX(26px);\n}\n.toggle-switch .slider {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: grey;\n  border-radius: 50px;\n}\n.toggle-switch .slider::after {\n  position: absolute;\n  content: \"\";\n  height: 18px;\n  width: 18px;\n  background-color: white;\n  left: 4px;\n  bottom: 4px;\n  border-radius: 50px;\n}\n.group-list {\n  margin-bottom: 0rem;\n}\n.text-crossed {\n  text-decoration: line-through;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlld3MvYWRtaW4tcGFnZXMvY29tcGFueS9hZGQvRDpcXHhhbXBwXFxodGRvY3NcXHNoLWFkbWluLXVpXFxhbmd1bGFyL3NyY1xcYXBwXFx2aWV3c1xcYWRtaW4tcGFnZXNcXGNvbXBhbnlcXGFkZFxcYWRkLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC92aWV3cy9hZG1pbi1wYWdlcy9jb21wYW55L2FkZC9hZGQuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFBO0VBQ0EsV0FBQTtFQUNBLHFCQUFBO0VBQ0Esa0JBQUE7QUNDRjtBREFFO0VBQ0UsYUFBQTtBQ0VKO0FEREk7RUFDRSx5QkFBQTtFQUNBLG1CQUFBO0FDR047QURESTtFQUNFLG1DQUFBO0VBRUEsMkJBQUE7QUNHTjtBREFFO0VBQ0Usa0JBQUE7RUFDQSxPQUFBO0VBQ0EsTUFBQTtFQUNBLFFBQUE7RUFDQSxTQUFBO0VBQ0Esc0JBQUE7RUFDQSxtQkFBQTtBQ0VKO0FEREk7RUFDRSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsV0FBQTtFQUNBLHVCQUFBO0VBQ0EsU0FBQTtFQUNBLFdBQUE7RUFDQSxtQkFBQTtBQ0dOO0FERUE7RUFDRSxtQkFBQTtBQ0NGO0FERUE7RUFDRSw2QkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvdmlld3MvYWRtaW4tcGFnZXMvY29tcGFueS9hZGQvYWRkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRvZ2dsZS1zd2l0Y2gge1xyXG4gIGhlaWdodDogMjZweDtcclxuICB3aWR0aDogNTJweDtcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIGlucHV0IHtcclxuICAgIGRpc3BsYXk6IG5vbmU7XHJcbiAgICAmOmNoZWNrZWQgKyAuc2xpZGVyIHtcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzAzYzg5NTtcclxuICAgICAgYm9yZGVyLXJhZGl1czogNTBweDtcclxuICAgIH1cclxuICAgICY6Y2hlY2tlZCArIC5zbGlkZXI6OmFmdGVyIHtcclxuICAgICAgLXdlYmtpdC10cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMjZweCk7XHJcbiAgICAgIC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMjZweCk7XHJcbiAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgyNnB4KTtcclxuICAgIH1cclxuICB9XHJcbiAgLnNsaWRlciB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBsZWZ0OiAwO1xyXG4gICAgdG9wOiAwO1xyXG4gICAgcmlnaHQ6IDA7XHJcbiAgICBib3R0b206IDA7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBncmV5O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNTBweDtcclxuICAgICY6OmFmdGVyIHtcclxuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgICBjb250ZW50OiAnJztcclxuICAgICAgaGVpZ2h0OiAxOHB4O1xyXG4gICAgICB3aWR0aDogMThweDtcclxuICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgICAgIGxlZnQ6IDRweDtcclxuICAgICAgYm90dG9tOiA0cHg7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6IDUwcHg7XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcblxyXG4uZ3JvdXAtbGlzdHtcclxuICBtYXJnaW4tYm90dG9tOiAwcmVtO1xyXG59XHJcblxyXG4udGV4dC1jcm9zc2VkIHtcclxuICB0ZXh0LWRlY29yYXRpb246IGxpbmUtdGhyb3VnaDtcclxufSIsIi50b2dnbGUtc3dpdGNoIHtcbiAgaGVpZ2h0OiAyNnB4O1xuICB3aWR0aDogNTJweDtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG4udG9nZ2xlLXN3aXRjaCBpbnB1dCB7XG4gIGRpc3BsYXk6IG5vbmU7XG59XG4udG9nZ2xlLXN3aXRjaCBpbnB1dDpjaGVja2VkICsgLnNsaWRlciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwM2M4OTU7XG4gIGJvcmRlci1yYWRpdXM6IDUwcHg7XG59XG4udG9nZ2xlLXN3aXRjaCBpbnB1dDpjaGVja2VkICsgLnNsaWRlcjo6YWZ0ZXIge1xuICAtd2Via2l0LXRyYW5zZm9ybTogdHJhbnNsYXRlWCgyNnB4KTtcbiAgLW1zLXRyYW5zZm9ybTogdHJhbnNsYXRlWCgyNnB4KTtcbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDI2cHgpO1xufVxuLnRvZ2dsZS1zd2l0Y2ggLnNsaWRlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICByaWdodDogMDtcbiAgYm90dG9tOiAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBncmV5O1xuICBib3JkZXItcmFkaXVzOiA1MHB4O1xufVxuLnRvZ2dsZS1zd2l0Y2ggLnNsaWRlcjo6YWZ0ZXIge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIGhlaWdodDogMThweDtcbiAgd2lkdGg6IDE4cHg7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBsZWZ0OiA0cHg7XG4gIGJvdHRvbTogNHB4O1xuICBib3JkZXItcmFkaXVzOiA1MHB4O1xufVxuXG4uZ3JvdXAtbGlzdCB7XG4gIG1hcmdpbi1ib3R0b206IDByZW07XG59XG5cbi50ZXh0LWNyb3NzZWQge1xuICB0ZXh0LWRlY29yYXRpb246IGxpbmUtdGhyb3VnaDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -82,6 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../shared-ui/models/global.model */ "./src/app/shared-ui/models/global.model.ts");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 /* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -91,6 +92,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -111,7 +113,9 @@ var AddComponent = /** @class */ (function () {
         this.router = router;
         this.currentUser = new _layouts_home_layout_user_model__WEBPACK_IMPORTED_MODULE_2__["currentUser"];
         this.selectedGroups = [];
+        this.groupForRemove = [];
         this.addedGroup = "";
+        this.loadingData = false;
         this.company = new _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_6__["Company"];
         this.globalService.setLoadingLabel('Loading... Please Wait.');
         this.currentUser = JSON.parse(this.jwtService.getCurrentUser());
@@ -126,24 +130,46 @@ var AddComponent = /** @class */ (function () {
     AddComponent.prototype.getCompany = function (id) {
         var _this = this;
         this.spinner.show();
-        this.globalService.getCompanyById({ id: id }).subscribe(function (data) {
+        this.loadingData = true;
+        var postData = {
+            id: id,
+            user: this.currentUser.id
+        };
+        this.globalService.getCompanyById(postData).subscribe(function (data) {
             if (Object.keys(data).length) {
                 _this.company = data;
+                if (_this.company.groups && _this.company.groups.length) {
+                    _this.company.groups.forEach(function (element) {
+                        _this.selectedGroups.push({ name: element });
+                    });
+                }
             }
             _this.spinner.hide();
+            _this.loadingData = false;
         }, function (error) {
-            _this.toastr.error('Error', 'There are some server error! Please check connection.');
+            _this.spinner.hide();
+            _this.loadingData = false;
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].reponseCode[error.status], 'Error');
         });
     };
     AddComponent.prototype.saveCompany = function () {
         var _this = this;
+        this.company.groups = [];
+        if (this.selectedGroups.length) {
+            this.selectedGroups.forEach(function (element) {
+                if (!element.removed) {
+                    _this.company.groups.push(element.name);
+                }
+            });
+        }
         var postData = {
             name: this.company.companyName,
             isActive: this.company.isActive ? 1 : 0,
-            creator: this.currentUser.id,
-            groups: this.company.groups,
+            creator: this.currentUser.id
         };
-        console.log("postData ========= ");
+        if (this.company.groups.length) {
+            postData['groups'] = this.company.groups;
+        }
         this.globalService.setLoadingLabel('Inserting... Please Wait.');
         this.spinner.show();
         this.globalService.saveCompany(postData).subscribe(function (data) {
@@ -155,16 +181,28 @@ var AddComponent = /** @class */ (function () {
             else {
                 _this.toastr.error("There are some error while inserting the data!", "Error");
             }
+        }, function (error) {
+            _this.spinner.hide();
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].reponseCode[error.status], 'Error');
         });
     };
     AddComponent.prototype.updateCompany = function () {
         var _this = this;
+        this.company.groups = [];
+        if (this.selectedGroups.length) {
+            this.selectedGroups.forEach(function (element) {
+                if (!element.removed) {
+                    _this.company.groups.push(element.name);
+                }
+            });
+        }
         var postData = {
             name: this.company.companyName,
             isActive: this.company.isActive ? 1 : 0,
             modifier: this.currentUser.id,
-            groups: this.company.groups,
+            groups: this.company.groups
         };
+        console.log("postData ========= ", postData);
         this.globalService.setLoadingLabel('Updating... Please Wait.');
         this.spinner.show();
         this.globalService.updateCompany(postData, this.company['companyId']).subscribe(function (data) {
@@ -176,15 +214,32 @@ var AddComponent = /** @class */ (function () {
             else {
                 _this.toastr.error("There are some error while updating the data!", "Error");
             }
+        }, function (error) {
+            _this.spinner.hide();
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].reponseCode[error.status], 'Error');
+        });
+    };
+    AddComponent.prototype.multiSelectGroup = function (multiSelect) {
+        var _this = this;
+        this.groupForRemove = [];
+        this.selectedGroups.forEach(function (element) {
+            if (multiSelect) {
+                element.added = false;
+                element.removed = false;
+            }
+            else {
+                element.added = true;
+                _this.groupForRemove.push(element);
+            }
         });
     };
     AddComponent.prototype.selectGroup = function (group) {
-        var found = this.selectedGroups.filter(function (e) { return e == group; });
+        var found = this.groupForRemove.filter(function (e) { return e.name == group.name; });
         if (found.length) {
-            this.selectedGroups.splice(this.selectedGroups.indexOf(found[0]), 1);
+            this.groupForRemove.splice(this.groupForRemove.indexOf(found[0]), 1);
         }
         else {
-            this.selectedGroups.push(group);
+            this.groupForRemove.push(group);
         }
     };
     AddComponent.prototype.showAddGroupModal = function () {
@@ -192,20 +247,25 @@ var AddComponent = /** @class */ (function () {
         this.addGroupModal.show();
     };
     AddComponent.prototype.addGroup = function () {
-        if (!this.company['groups']) {
-            this.company['groups'] = [];
+        var _this = this;
+        var found = this.selectedGroups.filter(function (e) { return e.name == _this.addedGroup; });
+        if (found.length) {
+            this.toastr.info("This group is already exists!", 'Info');
+            return;
         }
-        this.company['groups'].push(this.addedGroup);
-        this.addGroupModal.hide();
+        else {
+            this.selectedGroups.push({ name: this.addedGroup });
+            this.addedGroup = "";
+        }
     };
     AddComponent.prototype.deleteGroup = function () {
         var _this = this;
-        if (confirm("Are you sure want to delete this groups!")) {
-            this.selectedGroups.forEach(function (element) {
-                _this.company.groups.splice(_this.company.groups.indexOf(element), 1);
-                _this.selectedGroups.splice(_this.selectedGroups.indexOf(element), 1);
-            });
-        }
+        this.selectedGroups.forEach(function (element) {
+            var found = _this.groupForRemove.filter(function (e) { return e.name == element.name; });
+            if (found.length) {
+                element.removed = true;
+            }
+        });
     };
     AddComponent.ctorParameters = function () { return [
         { type: _shared_ui_jwt_service__WEBPACK_IMPORTED_MODULE_1__["JwtService"] },
@@ -277,7 +337,8 @@ var AddModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _add_routing_module__WEBPACK_IMPORTED_MODULE_2__["AddRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__["ModalModule"].forRoot()
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__["ModalModule"].forRoot(),
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__["TooltipModule"].forRoot()
             ]
         })
     ], AddModule);

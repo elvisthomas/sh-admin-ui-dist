@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">{{ user.id ? 'Edit' : 'Add' }} User</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Company:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.company, 'text-primary': user.company}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-8 mg-t-5 mg-md-t-0\">\r\n                  <select #s id=\"company\" class=\"form-control\" name=\"company\" [ngModel]=\"user.company\" (ngModelChange)=\"changeCompany(user.company, $event, s)\">\r\n                    <option value=\"\">Select Company</option>\r\n                    <option [ngValue]=\"company\" *ngFor=\"let company of companies;\">{{ company?.companyName }}</option>\r\n                  </select>\r\n                  <input class=\"form-control\" type=\"text\" [value]=\"user?.company?.companyName\" readonly *ngIf=\"!permission.view\">\r\n                </div>\r\n                <div class=\"col-md-1 mg-t-5 mg-md-t-0\">\r\n                  <button class=\"btn ripple btn-success btn-icon pull-right\" [routerLink]=\"['/company/add']\"><i class=\"fe fe-plus\"></i></button>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">First Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.firstName, 'text-primary': user.firstName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter First Name\" type=\"text\" [(ngModel)]=\"user.firstName\" name=\"firstName\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Last Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.lastName, 'text-primary': user.lastName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter Last Name\" type=\"text\" [(ngModel)]=\"user.lastName\" name=\"lastName\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Email Address:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.emailAddress, 'text-primary': user.emailAddress}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter Email Address\" type=\"text\" [(ngModel)]=\"user.emailAddress\" name=\"emailAddress\" (ngModelChange)=\"checkValidEmail(user?.emailAddress)\">\r\n                  <p class=\"alert custom-p alert-danger validation-font-size  text-left\" role=\"alert\" *ngIf=\"!validEmail\">\r\n                    Your email address is invalid. Please enter a valid address.\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isActive\" name=\"isActive\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Admin:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isCustomerAdmin\" name=\"isCustomerAdmin\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"permission.view && isShDomain\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">SuccessHacker Admin:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isSuccessHackerAdmin\" name=\"isSuccessHackerAdmin\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Created By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ user?.createdBy?.fullName }} | {{ user?.createDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId && user?.modifiedBy\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Modified By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ user?.modifiedBy?.fullName }} | {{ user?.modifiedDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Last Login:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <span *ngIf=\"user?.lastSeenDate\">\r\n                    {{ user?.lastSeenDate | date: 'yyyy-MM-dd hh:mm' }}\r\n                  </span>\r\n                  <span *ngIf=\"!user?.lastSeenDate\">\r\n                    Never\r\n                  </span>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-12 mg-b-20\">\r\n                  <div class=\"btn-icon-list\">\r\n                    Groups: &nbsp;&nbsp;\r\n                    <button class=\"btn ripple btn-success btn-icon\" (click)=\"showAddGroupModal()\"><i class=\"fe fe-plus\" title=\"Add New\"></i></button>\r\n                    <!-- <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"deleteGroup()\" *ngIf=\"selectedGroups?.length\" title=\"Delete\"><i class=\"fe fe-trash\"></i></button> -->\r\n                    <button class=\"btn ripple btn-primary btn-icon\" *ngIf=\"user?.company?.companyId\" [routerLink]=\"['/company/edit', user?.company?.companyId]\" title=\"Company List\"><i class=\"fe fe-list\"></i></button>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"user?.company?.groups?.length\">\r\n                  <p *ngFor=\"let group of user.company.groups\" class=\"group-list\">\r\n                    <label> <input type=\"checkbox\" (change)=\"selectGroup(group)\" /> {{ group }} </label>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            \r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n              <div class=\"form-group row justify-content-end mb-0\">\r\n                <div class=\"col-md-12\">\r\n                  <!-- <app-alert></app-alert> -->\r\n                  <button class=\"btn ripple btn-light pd-x-30 pull-right\" [routerLink]=\"['/user/list']\">Cancel</button>&nbsp;&nbsp;\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" (click)=\"saveUser()\" *ngIf=\"!user?.userId\" [disabled]=\"!user.company || !user.firstName || !user.lastName || !user.emailAddress || !validEmail\">Save</button>\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" (click)=\"updateUser()\" *ngIf=\"user?.userId\" [disabled]=\"!user.company || !user.firstName || !user.lastName || !user.emailAddress || !validEmail\">Edit</button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #addGroupModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fa fa-plus\"></i> Add Group</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"addGroupModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Enter Group Name\" />\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"addGroupModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addGroup()\" [disabled]=\"!addedGroup\">Add</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- <pre [innerHtml]=\"user | json\"></pre> -->"
+module.exports = "<div class=\"container-fluid\" [hidden]=\"loadingData\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">{{ user.id ? 'Edit' : 'Add' }} User</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Company:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.company, 'text-primary': user.company}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-8 mg-t-5 mg-md-t-0\">\r\n                  <select #s id=\"company\" class=\"form-control\" name=\"company\" [ngModel]=\"user.company\" (ngModelChange)=\"changeCompany(user.company, $event, s)\">\r\n                    <option value=\"\">Select Company</option>\r\n                    <option [ngValue]=\"company\" *ngFor=\"let company of companies;\">{{ company?.companyName }}</option>\r\n                  </select>\r\n                  <input class=\"form-control\" type=\"text\" [value]=\"user?.company?.companyName\" readonly *ngIf=\"!permission.view\">\r\n                </div>\r\n                <div class=\"col-md-1 mg-t-5 mg-md-t-0\">\r\n                  <button class=\"btn ripple btn-success btn-icon pull-right\" [routerLink]=\"['/company/add']\"><i class=\"fe fe-plus\"></i></button>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">First Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.firstName, 'text-primary': user.firstName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter First Name\" type=\"text\" [(ngModel)]=\"user.firstName\" name=\"firstName\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Last Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.lastName, 'text-primary': user.lastName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter Last Name\" type=\"text\" [(ngModel)]=\"user.lastName\" name=\"lastName\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Email Address:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.emailAddress, 'text-primary': user.emailAddress}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter Email Address\" type=\"text\" [(ngModel)]=\"user.emailAddress\" name=\"emailAddress\" (ngModelChange)=\"checkValidEmail(user?.emailAddress)\">\r\n                  <p class=\"alert custom-p alert-danger validation-font-size  text-left\" role=\"alert\" *ngIf=\"!validEmail\">\r\n                    Your email address is invalid. Please enter a valid address.\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isActive\" name=\"isActive\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Admin:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isCustomerAdmin\" name=\"isCustomerAdmin\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"permission.view && isShDomain\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">SuccessHacker Admin:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isSuccessHackerAdmin\" name=\"isSuccessHackerAdmin\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Created By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ user?.createdBy?.fullName }} | {{ user?.createDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId && user?.modifiedBy\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Modified By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ user?.modifiedBy?.fullName }} | {{ user?.modifiedDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Last Login:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <span *ngIf=\"user?.lastSeenDate\">\r\n                    {{ user?.lastSeenDate | date: 'yyyy-MM-dd hh:mm' }}\r\n                  </span>\r\n                  <span *ngIf=\"!user?.lastSeenDate\">\r\n                    Never\r\n                  </span>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-12 mg-b-20\">\r\n                  <div class=\"btn-icon-list\">\r\n                    Groups: &nbsp;&nbsp;\r\n                    <button class=\"btn ripple btn-success btn-icon\" (click)=\"showAddGroupModal()\"><i class=\"fe fe-plus\" title=\"Add New\"></i></button>\r\n                    <!-- <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"deleteGroup()\" *ngIf=\"selectedGroups?.length\" title=\"Delete\"><i class=\"fe fe-trash\"></i></button> -->\r\n                    <button class=\"btn ripple btn-primary btn-icon\" *ngIf=\"user?.company?.companyId\" [routerLink]=\"['/company/edit', user?.company?.companyId]\" title=\"Company List\"><i class=\"fe fe-list\"></i></button>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"user?.company?.groups?.length\">\r\n                  <p *ngFor=\"let group of user.company.groups\" class=\"group-list\">\r\n                    <label> <input type=\"checkbox\" (change)=\"selectGroup(group)\" /> {{ group }} </label>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            \r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n              <div class=\"form-group row justify-content-end mb-0\">\r\n                <div class=\"col-md-12\">\r\n                  <!-- <app-alert></app-alert> -->\r\n                  <button class=\"btn ripple btn-light pd-x-30 pull-right\" [routerLink]=\"['/user/list']\">Cancel</button>&nbsp;&nbsp;\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" (click)=\"saveUser()\" *ngIf=\"!user?.userId\" [disabled]=\"!user.company || !user.firstName || !user.lastName || !user.emailAddress || !validEmail\">Save</button>\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" (click)=\"updateUser()\" *ngIf=\"user?.userId\" [disabled]=\"!user.company || !user.firstName || !user.lastName || !user.emailAddress || !validEmail\">Save</button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #addGroupModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fa fa-plus\"></i> Add Group</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"addGroupModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Enter Group Name\" />\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"addGroupModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addGroup()\" [disabled]=\"!addedGroup\">Add</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- <pre [innerHtml]=\"user | json\"></pre> -->"
 
 /***/ }),
 
@@ -83,6 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../shared-ui/models/global.model */ "./src/app/shared-ui/models/global.model.ts");
 /* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
 /* harmony import */ var _shared_ui_alert_alert_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../shared-ui/alert/alert.service */ "./src/app/shared-ui/alert/alert.service.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -92,6 +93,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -122,10 +124,10 @@ var UseraddComponent = /** @class */ (function () {
         this.user = new _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_7__["User"];
         this.selectedGroups = [];
         this.addedGroup = "";
+        this.loadingData = false;
         this.validEmail = true;
         this.globalService.setLoadingLabel('Loading... Please Wait.');
         this.currentUser = JSON.parse(this.jwtService.getCurrentUser());
-        console.log(" this.currentUser ------------- ", this.currentUser);
         this.companySearch.user = this.currentUser.id;
         this.route.params.subscribe(function (res) {
             if (res.id) {
@@ -145,26 +147,39 @@ var UseraddComponent = /** @class */ (function () {
     };
     UseraddComponent.prototype.getCompanies = function () {
         var _this = this;
-        this.spinner.show();
-        this.globalService.getCompanies({ user: this.companySearch.user }).subscribe(function (data) {
-            _this.spinner.hide();
-            if (Object.keys(data).length) {
-                _this.companies = data.items;
-                if (!_this.currentUser['isSuccessHackerAdmin']) {
-                    _this.user.company = _this.currentUser['company'];
+        if (!this.currentUser['isSuccessHackerAdmin']) {
+            this.user.company = this.currentUser['company'];
+        }
+        else {
+            this.spinner.show();
+            this.loadingData = true;
+            this.globalService.getCompanies({ user: this.companySearch.user }).subscribe(function (data) {
+                _this.spinner.hide();
+                if (Object.keys(data).length) {
+                    _this.companies = data.items;
+                    if (_this.userID) {
+                        _this.getUser(_this.userID);
+                    }
+                    else {
+                        _this.loadingData = false;
+                    }
                 }
-                if (_this.userID) {
-                    _this.getUser(_this.userID);
-                }
-            }
-        }, function (error) {
-            _this.toastr.error('There are some server error! Please check connection.', 'Error');
-        });
+            }, function (error) {
+                _this.spinner.hide();
+                _this.loadingData = false;
+                _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].reponseCode[error.status], 'Error');
+            });
+        }
     };
     UseraddComponent.prototype.getUser = function (id) {
         var _this = this;
         this.spinner.show();
-        this.globalService.getUserById({ id: id }).subscribe(function (data) {
+        var postData = {
+            user: this.currentUser.id,
+            company: this.currentUser['company'].companyId,
+            id: id
+        };
+        this.globalService.getUserById(postData).subscribe(function (data) {
             if (Object.keys(data).length) {
                 _this.user = data;
                 var found = _this.companies.filter(function (e) { return e.companyId == _this.user.company.companyId; });
@@ -173,8 +188,11 @@ var UseraddComponent = /** @class */ (function () {
                 }
             }
             _this.spinner.hide();
+            _this.loadingData = false;
         }, function (error) {
-            _this.toastr.error('There are some server error! Please check connection.', 'Error');
+            _this.spinner.hide();
+            _this.loadingData = false;
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].reponseCode[error.status], 'Error');
         });
     };
     UseraddComponent.prototype.saveUser = function () {
@@ -188,11 +206,11 @@ var UseraddComponent = /** @class */ (function () {
         var postData = {
             firstName: this.user.firstName,
             lastName: this.user.lastName,
-            emailAddress: this.user.firstName,
+            emailAddress: this.user.emailAddress,
             isActive: this.user.isActive ? 1 : 0,
-            customerAdmin: this.user.isActive ? 1 : 0,
-            successHackerAdmin: this.user.isActive ? 1 : 0,
-            // groups: this.user.company.groups,
+            customerAdmin: this.user.isCustomerAdmin ? 1 : 0,
+            successHackerAdmin: this.user.isSuccessHackerAdmin ? 1 : 0,
+            groups: this.user.company.groups,
             company: this.user.company.companyId,
             creator: this.currentUser.id
         };
@@ -205,6 +223,9 @@ var UseraddComponent = /** @class */ (function () {
             else {
                 _this.toastr.error("There are some error while inserting the data!", "Error");
             }
+        }, function (error) {
+            _this.spinner.hide();
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].reponseCode[error.status], 'Error');
         });
     };
     UseraddComponent.prototype.updateUser = function () {
@@ -212,14 +233,16 @@ var UseraddComponent = /** @class */ (function () {
         var postData = {
             firstName: this.user.firstName,
             lastName: this.user.lastName,
-            emailAddress: this.user.firstName,
+            emailAddress: this.user.emailAddress,
             isActive: this.user.isActive ? 1 : 0,
             customerAdmin: this.user.isCustomerAdmin ? 1 : 0,
             successHackerAdmin: this.user.isSuccessHackerAdmin ? 1 : 0,
-            // groups: this.user.company.groups,
+            groups: this.user.company.groups,
             company: this.user.company.companyId,
             modifier: this.currentUser.id
         };
+        this.globalService.setLoadingLabel('Updating... Please Wait.');
+        this.spinner.show();
         this.globalService.updateUser(postData, this.user['userId']).subscribe(function (data) {
             if (data && data.modifiedBy) {
                 _this.toastr.success("Data updated successfully.", "Success");
@@ -228,6 +251,10 @@ var UseraddComponent = /** @class */ (function () {
             else {
                 _this.toastr.error("There are some error while updating the data!", "Error");
             }
+            _this.spinner.hide();
+        }, function (error) {
+            _this.spinner.hide();
+            _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].reponseCode[error.status], 'Error');
         });
     };
     UseraddComponent.prototype.selectGroup = function (group) {
@@ -255,10 +282,6 @@ var UseraddComponent = /** @class */ (function () {
                 _this.selectedGroups.splice(_this.selectedGroups.indexOf(element), 1);
             });
         }
-    };
-    UseraddComponent.prototype.getOldCompany = function (company) {
-        this.oldCompany = Object.assign({}, company);
-        console.log("============ ", this.oldCompany);
     };
     UseraddComponent.prototype.changeCompany = function (previousCompany, company, companysEl) {
         // If we're changing company from "All" to any, it's OK

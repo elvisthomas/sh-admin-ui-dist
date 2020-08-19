@@ -103,32 +103,30 @@ var IframeAccessComponent = /** @class */ (function () {
         this.globalService = globalService;
         this.toastr = toastr;
         this.router = router;
+        this.possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&$#@";
+        this.lengthOfCode = 80;
         this.route.params.subscribe(function (res) {
-            if (res.code && res.email && res.createdt) {
-                _this.getAccess(res.code, res.email, res.createdt);
+            console.log("res ====== ", res);
+            if (res.email && res.createdt) {
+                _this.getAccess(res.email, res.createdt);
             }
         });
     }
     IframeAccessComponent.prototype.ngOnInit = function () {
     };
-    IframeAccessComponent.prototype.getAccess = function (code, email, createdt) {
+    IframeAccessComponent.prototype.getAccess = function (email, createdt) {
         var _this = this;
         this.spinner.show();
         var postObject = {
-            code: code,
             email: email,
             createdt: createdt,
             source: 'Admin Portal'
         };
-        postObject.email = 'jdoe@spam.com';
-        postObject.email = email;
-        postObject.createdt = '2020-08-03T22:08:53Z';
-        postObject.createdt = createdt;
         this.globalService.getConfig(postObject).subscribe(function (configDdata) {
             _this.globalService.getAccess(postObject).subscribe(function (data) {
                 console.log("data ================ ", data);
                 if (data != "") {
-                    _this.jwtService.saveToken(code);
+                    _this.jwtService.saveToken(_this.makeRandom(_this.lengthOfCode, _this.possible));
                     var userDetails = {
                         id: data.userId,
                         firstName: data.firstName,
@@ -140,7 +138,7 @@ var IframeAccessComponent = /** @class */ (function () {
                         company: data.company,
                         config: configDdata
                     };
-                    // userDetails.isSuccessHackerAdmin = 1;
+                    userDetails.isSuccessHackerAdmin = 1;
                     _this.jwtService.saveCurrentUser(JSON.stringify(userDetails));
                     if (userDetails.isSuccessHackerAdmin) {
                         _this.router.navigate(['/company/list']);
@@ -148,6 +146,7 @@ var IframeAccessComponent = /** @class */ (function () {
                     else {
                         _this.router.navigate(['/user/list']);
                     }
+                    _this.toastr.success("Verified successfully.", "Success");
                 }
                 else {
                     _this.router.navigate(['/404']);
@@ -155,6 +154,13 @@ var IframeAccessComponent = /** @class */ (function () {
             }, function (error) {
             });
         });
+    };
+    IframeAccessComponent.prototype.makeRandom = function (lengthOfCode, possible) {
+        var text = "";
+        for (var i = 0; i < lengthOfCode; i++) {
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+        return text;
     };
     IframeAccessComponent.ctorParameters = function () { return [
         { type: _shared_ui_jwt_service__WEBPACK_IMPORTED_MODULE_1__["JwtService"] },
