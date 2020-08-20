@@ -124,7 +124,6 @@ var IframeAccessComponent = /** @class */ (function () {
         };
         this.globalService.getConfig(postObject).subscribe(function (configDdata) {
             _this.globalService.getAccess(postObject).subscribe(function (data) {
-                console.log("data ================ ", data);
                 if (data != "") {
                     _this.jwtService.saveToken(_this.makeRandom(_this.lengthOfCode, _this.possible));
                     var userDetails = {
@@ -138,7 +137,6 @@ var IframeAccessComponent = /** @class */ (function () {
                         company: data.company,
                         config: configDdata
                     };
-                    userDetails.isSuccessHackerAdmin = 1;
                     _this.jwtService.saveCurrentUser(JSON.stringify(userDetails));
                     if (userDetails.isSuccessHackerAdmin) {
                         _this.router.navigate(['/company/list']);

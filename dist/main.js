@@ -1320,7 +1320,6 @@ var GlobalService = /** @class */ (function () {
         if (param['sortOrder']) {
             url += "&sortOrder=" + param['sortOrder'];
         }
-        console.log("url ====== ", url);
         return this.http.get(url, { headers: headers });
     };
     GlobalService.prototype.getUserById = function (param) {
