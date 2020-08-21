@@ -147,6 +147,9 @@ var UseraddComponent = /** @class */ (function () {
         var _this = this;
         if (!this.currentUser['isSuccessHackerAdmin']) {
             this.user.company = this.currentUser['company'];
+            if (this.userID) {
+                this.getUser(this.userID);
+            }
         }
         else {
             this.spinner.show();
@@ -180,9 +183,11 @@ var UseraddComponent = /** @class */ (function () {
         this.globalService.getUserById(postData).subscribe(function (data) {
             if (Object.keys(data).length) {
                 _this.user = data;
-                var found = _this.companies.filter(function (e) { return e.companyId == _this.user.company.companyId; });
-                if (found.length) {
-                    _this.user.company = found[0];
+                if (_this.companies && _this.companies.length) {
+                    var found = _this.companies.filter(function (e) { return e.companyId == _this.user.company.companyId; });
+                    if (found.length) {
+                        _this.user.company = found[0];
+                    }
                 }
             }
             _this.spinner.hide();
