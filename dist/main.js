@@ -1386,7 +1386,7 @@ var GlobalService = /** @class */ (function () {
         return this.http.post(url, file, { headers: headers });
     };
     GlobalService.prototype.exportData = function (param) {
-        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey, 'Content-Type': 'text/csv' });
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey, 'Content-Type': 'text/csv', Accept: 'application/csv' });
         var url = this.baseUrl + "bulkExport?company=" + param['company'] + "&user=" + param['user'];
         if (param['isActive'] && param['isActive'] != "") {
             url += "&isActive=" + param['isActive'];
@@ -1398,6 +1398,11 @@ var GlobalService = /** @class */ (function () {
             url += "&search=" + param['search'];
         }
         return this.http.get(url, { headers: headers });
+        /* let httpOptions = {
+          headers: headers,
+          responseType: 'text/csv'
+          };
+        return this.http.get(url, { httpOptions }); */
     };
     GlobalService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

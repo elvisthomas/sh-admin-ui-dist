@@ -302,6 +302,9 @@ var UseraddComponent = /** @class */ (function () {
         if (this.isShDomain) {
             this.user.isCustomerAdmin = 0;
         }
+        else {
+            this.user.isSuccessHackerAdmin = 0;
+        }
         return this.validEmail;
     };
     UseraddComponent.ctorParameters = function () { return [
