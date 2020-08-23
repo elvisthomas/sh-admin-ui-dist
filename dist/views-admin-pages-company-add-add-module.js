@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" [hidden]=\"loadingData\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">{{ company?.companyId ? 'Edit' : 'Add' }} Company</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !company.companyName, 'text-primary': company.companyName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" [(ngModel)]=\"company.companyName\" placeholder=\"Enter Company Name\" type=\"text\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"company.isActive\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"company?.companyId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Created By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.createdBy?.fullName }} | {{ company?.createDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"company?.companyId && company?.modifiedBy\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Modified By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.modifiedBy?.fullName }} | {{ company?.modifiedDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Users:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.activeUsers }} active / {{ company?.totalUsers }} total\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-12 mg-b-20\">\r\n                  <div class=\"btn-icon-list\">\r\n                    Groups:\r\n                  </div>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-8 input-group\">\r\n                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Add new group\" (keyup.enter)=\"addGroup()\"/>\r\n                      <span class=\"input-group-btn\">\r\n                        <button class=\"btn ripple btn-success btn-icon\" (click)=\"addGroup()\" tooltip=\"{{ addedGroup ? 'Add this group' : 'Enter a group name to add a group' }}\"><i class=\"fe fe-plus\" ></i></button>\r\n                      </span>\r\n                      <span class=\"input-group-btn\">\r\n                        <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"deleteGroup()\" [disabled]=\"!groupForRemove.length\" tooltip=\"Delete selected groups\"><i class=\"fe fe-trash\"></i></button>\r\n                      </span>\r\n                    </div>\r\n                  </div>  \r\n                </div>\r\n                <div *ngIf=\"selectedGroups?.length\">\r\n                  <table class=\"table mg-b-0\">\r\n                    <thead>\r\n                      <tr>\r\n                        <th>\r\n                          <input type=\"checkbox\" [(ngModel)]=\"multiSelect\" name=\"multiSelect\" (click)=\"multiSelectGroup(multiSelect)\"/>\r\n                        </th>\r\n                        <th>Name</th>\r\n                      </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                      <tr *ngFor=\"let group of selectedGroups; let i = index;\">\r\n                        <td><input type=\"checkbox\" (change)=\"selectGroup(group)\" [(ngModel)]=\"group.added\" [disabled]=\"group.removed\" name=\"group{{i}}\"/></td>\r\n                        <td><label [ngClass]=\"{'text-crossed': group.removed}\">  {{ group?.name }} </label></td>\r\n                      </tr>\r\n                    </tbody>\r\n                  </table>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            \r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n              <div class=\"form-group row justify-content-end mb-0\">\r\n                <div class=\"col-md-12\">\r\n                  <button class=\"btn ripple btn-light pd-x-30 pull-right\" [routerLink]=\"['/company/list']\">Cancel</button>&nbsp;&nbsp;\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" [disabled]=\"!company?.companyName\" (click)=\"saveCompany()\" *ngIf=\"!company?.companyId\">Save</button>\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" [disabled]=\"!company?.companyName\" (click)=\"updateCompany()\" *ngIf=\"company?.companyId\">Save</button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #addGroupModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fa fa-plus\"></i> Add Group</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"addGroupModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Enter Group Name\" />\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"addGroupModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addGroup()\" [disabled]=\"!addedGroup\">Add</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\" [hidden]=\"loadingData\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">{{ company?.companyId ? 'Edit' : 'Add' }} Company</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !company.companyName, 'text-primary': company.companyName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" [(ngModel)]=\"company.companyName\" placeholder=\"Enter Company Name\" type=\"text\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"company.isActive\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"company?.companyId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Created By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.createdBy?.fullName }} | {{ company?.createDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"company?.companyId && company?.modifiedBy\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Modified By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ company?.modifiedBy?.fullName }} | {{ company?.modifiedDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Users:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\" [hidden]=\"!company?.totalUsers\">\r\n                  {{ company?.activeUsers }} active / {{ company?.totalUsers }} total\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\" *ngIf=\"!company?.totalUsers\">\r\n                  No users\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-12 mg-b-20\">\r\n                  <div class=\"btn-icon-list\">\r\n                    Groups:\r\n                  </div>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-8 input-group\">\r\n                      <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Add new group\" (keyup.enter)=\"addGroup()\"/>\r\n                      <span class=\"input-group-btn\">\r\n                        <button class=\"btn ripple btn-success btn-icon\" (click)=\"addGroup()\" tooltip=\"{{ addedGroup ? 'Add this group' : 'Enter a group name to add a group' }}\"><i class=\"fe fe-plus\" ></i></button>\r\n                      </span>\r\n                      <span class=\"input-group-btn\">\r\n                        <button class=\"btn ripple btn-secondary btn-icon\" (click)=\"deleteGroup()\" [disabled]=\"!groupForRemove.length\" tooltip=\"Delete selected groups\"><i class=\"fe fe-trash\"></i></button>\r\n                      </span>\r\n                    </div>\r\n                  </div>  \r\n                </div>\r\n                <div class=\"tbody-scroll\" *ngIf=\"selectedGroups?.length\">\r\n                  <table class=\"table mg-b-0\">\r\n                    <thead class=\"nowrap\">\r\n                      <tr>\r\n                        <th>\r\n                          <input type=\"checkbox\" [(ngModel)]=\"multiSelect\" name=\"multiSelect\" (click)=\"multiSelectGroup(multiSelect)\"/>\r\n                        </th>\r\n                        <th [class.active]=\"groupOrder === 'name'\" (click)=\"setOrder()\">\r\n                          Name\r\n                          <span [hidden]=\"groupReverse\">▼</span>\r\n                          <span [hidden]=\"!groupReverse\">▲</span>\r\n                        </th>\r\n                      </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                      <tr *ngFor=\"let group of selectedGroups; let i = index;\">\r\n                        <td><input type=\"checkbox\" (change)=\"selectGroup(group)\" [(ngModel)]=\"group.added\" [disabled]=\"group.removed\" name=\"group{{i}}\"/></td>\r\n                        <td><label [ngClass]=\"{'text-crossed': group.removed}\">  {{ group?.name }} </label></td>\r\n                      </tr>\r\n                    </tbody>\r\n                  </table>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            \r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n              <div class=\"form-group row justify-content-end mb-0\">\r\n                <div class=\"col-md-12\">\r\n                  <button class=\"btn ripple btn-light pd-x-30 pull-right\" [routerLink]=\"['/company/list']\">Cancel</button>&nbsp;&nbsp;\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" [disabled]=\"!company?.companyName\" (click)=\"saveCompany()\" *ngIf=\"!company?.companyId\">Save</button>\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" [disabled]=\"!company?.companyName\" (click)=\"updateCompany()\" *ngIf=\"company?.companyId\">Save</button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #addGroupModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fa fa-plus\"></i> Add Group</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"addGroupModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Enter Group Name\" />\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"addGroupModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addGroup()\" [disabled]=\"!addedGroup\">Add</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -82,6 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../shared-ui/models/global.model */ "./src/app/shared-ui/models/global.model.ts");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 /* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -91,6 +92,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -114,6 +116,8 @@ var AddComponent = /** @class */ (function () {
         this.groupForRemove = [];
         this.addedGroup = "";
         this.loadingData = false;
+        this.groupOrder = 'name';
+        this.groupReverse = false;
         this.company = new _shared_ui_models_global_model__WEBPACK_IMPORTED_MODULE_6__["Company"];
         this.globalService.setLoadingLabel('Loading... Please Wait.');
         this.currentUser = JSON.parse(this.jwtService.getCurrentUser());
@@ -129,6 +133,27 @@ var AddComponent = /** @class */ (function () {
     }
     AddComponent.prototype.ngOnInit = function () {
     };
+    AddComponent.prototype.setOrder = function () {
+        this.groupReverse = !this.groupReverse;
+        this.selectedGroups.reverse();
+    };
+    AddComponent.prototype.sortAlphaNum = function () {
+        var reA = /[^a-zA-Z]/g;
+        var reN = /[^0-9]/g;
+        function sortAlphaNum(a, b) {
+            var aA = a.name.replace(reA, "");
+            var bA = b.name.replace(reA, "");
+            if (aA === bA) {
+                var aN = parseInt(a.name.replace(reN, ""), 10);
+                var bN = parseInt(b.name.replace(reN, ""), 10);
+                return aN === bN ? 0 : aN > bN ? 1 : -1;
+            }
+            else {
+                return aA > bA ? 1 : -1;
+            }
+        }
+        this.selectedGroups = this.selectedGroups.sort(sortAlphaNum);
+    };
     AddComponent.prototype.getCompany = function (id) {
         var _this = this;
         this.spinner.show();
@@ -140,10 +165,12 @@ var AddComponent = /** @class */ (function () {
         this.globalService.getCompanyById(postData).subscribe(function (data) {
             if (Object.keys(data).length) {
                 _this.company = data;
+                _this.tempArray = _this.company.groups;
                 if (_this.company.groups && _this.company.groups.length) {
                     _this.company.groups.forEach(function (element) {
                         _this.selectedGroups.push({ name: element });
                     });
+                    _this.sortAlphaNum();
                 }
             }
             _this.spinner.hide();
@@ -151,7 +178,12 @@ var AddComponent = /** @class */ (function () {
         }, function (error) {
             _this.spinner.hide();
             _this.loadingData = false;
-            _this.toastr.error(error.error.message, 'Error ' + error.status);
+            if (error && error.error && error.error.message) {
+                _this.toastr.error(error.error.message, 'Error ' + error.status);
+            }
+            else {
+                _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].reponseCode[error.status], 'Error');
+            }
         });
     };
     AddComponent.prototype.saveCompany = function () {
@@ -185,7 +217,12 @@ var AddComponent = /** @class */ (function () {
             }
         }, function (error) {
             _this.spinner.hide();
-            _this.toastr.error(error.error.message, 'Error ' + error.status);
+            if (error && error.error && error.error.message) {
+                _this.toastr.error(error.error.message, 'Error ' + error.status);
+            }
+            else {
+                _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].reponseCode[error.status], 'Error');
+            }
         });
     };
     AddComponent.prototype.updateCompany = function () {
@@ -217,7 +254,12 @@ var AddComponent = /** @class */ (function () {
             }
         }, function (error) {
             _this.spinner.hide();
-            _this.toastr.error(error.error.message, 'Error ' + error.status);
+            if (error && error.error && error.error.message) {
+                _this.toastr.error(error.error.message, 'Error ' + error.status);
+            }
+            else {
+                _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].reponseCode[error.status], 'Error');
+            }
         });
     };
     AddComponent.prototype.multiSelectGroup = function (multiSelect) {
@@ -259,6 +301,7 @@ var AddComponent = /** @class */ (function () {
                 this.selectedGroups.push({ name: this.addedGroup });
                 this.addedGroup = "";
             }
+            this.sortAlphaNum();
         }
     };
     AddComponent.prototype.deleteGroup = function () {
@@ -318,12 +361,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./add.component */ "./src/app/views/admin-pages/company/add/add.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
+/* harmony import */ var ngx_order_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-order-pipe */ "./node_modules/ngx-order-pipe/fesm5/ngx-order-pipe.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -341,7 +386,8 @@ var AddModule = /** @class */ (function () {
                 _add_routing_module__WEBPACK_IMPORTED_MODULE_2__["AddRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
                 ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__["ModalModule"].forRoot(),
-                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__["TooltipModule"].forRoot()
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_5__["TooltipModule"].forRoot(),
+                ngx_order_pipe__WEBPACK_IMPORTED_MODULE_6__["OrderModule"]
             ]
         })
     ], AddModule);

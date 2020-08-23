@@ -257,12 +257,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_auth_layout_auth_layout_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layouts/auth-layout/auth-layout.module */ "./src/app/layouts/auth-layout/auth-layout.module.ts");
 /* harmony import */ var _layouts_home_layout_ui_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./layouts/home-layout/ui.module */ "./src/app/layouts/home-layout/ui.module.ts");
 /* harmony import */ var _layouts_admin_layout_default_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./layouts/admin-layout/default.module */ "./src/app/layouts/admin-layout/default.module.ts");
+/* harmony import */ var ngx_bootstrap_tooltip__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ngx-bootstrap/tooltip */ "./node_modules/ngx-bootstrap/tooltip/fesm5/ngx-bootstrap-tooltip.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -292,7 +294,8 @@ var AppModule = /** @class */ (function () {
                 _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"],
                 _layouts_home_layout_ui_module__WEBPACK_IMPORTED_MODULE_10__["UiModule"],
                 _layouts_auth_layout_auth_layout_module__WEBPACK_IMPORTED_MODULE_9__["AuthLayoutModule"],
-                _layouts_admin_layout_default_module__WEBPACK_IMPORTED_MODULE_11__["DefaultModule"]
+                _layouts_admin_layout_default_module__WEBPACK_IMPORTED_MODULE_11__["DefaultModule"],
+                ngx_bootstrap_tooltip__WEBPACK_IMPORTED_MODULE_12__["TooltipModule"].forRoot()
             ],
             providers: [_shared_ui_auth_guard__WEBPACK_IMPORTED_MODULE_7__["AuthGuard"], {
                     provide: _angular_common__WEBPACK_IMPORTED_MODULE_8__["LocationStrategy"],
@@ -572,6 +575,10 @@ var routes = [
         children: [
             {
                 path: 'validateUser/:email/:createdt',
+                loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-iframe-access-iframe-access-module */ "views-auth-pages-iframe-access-iframe-access-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/iframe-access/iframe-access.module */ "./src/app/views/auth-pages/iframe-access/iframe-access.module.ts")).then(function (mod) { return mod.IframeAccessModule; }); }
+            },
+            {
+                path: 'validateUser/:email/:createdt/:proxy',
                 loadChildren: function () { return __webpack_require__.e(/*! import() | views-auth-pages-iframe-access-iframe-access-module */ "views-auth-pages-iframe-access-iframe-access-module").then(__webpack_require__.bind(null, /*! ./../../views/auth-pages/iframe-access/iframe-access.module */ "./src/app/views/auth-pages/iframe-access/iframe-access.module.ts")).then(function (mod) { return mod.IframeAccessModule; }); }
             },
             {
@@ -1243,6 +1250,9 @@ var GlobalService = /** @class */ (function () {
     GlobalService.prototype.getAccess = function (param) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'api-key': this.apiKey });
         var url = this.baseUrl + "validateUser?email=" + param['email'] + "&createdt=" + param['createdt'] + "&source=" + param['source'];
+        if (param['proxy']) {
+            url += "&proxy=" + param['proxy'];
+        }
         return this.http.get(url, { headers: headers });
     };
     GlobalService.prototype.getConfig = function (param) {
@@ -1322,6 +1332,9 @@ var GlobalService = /** @class */ (function () {
         }
         if (param['sortOrder']) {
             url += "&sortOrder=" + param['sortOrder'];
+        }
+        if (param['method']) {
+            url += "&method=" + param['method'];
         }
         return this.http.get(url, { headers: headers });
     };

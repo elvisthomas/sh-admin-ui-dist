@@ -62,6 +62,7 @@ var ImportStatusSearch = /** @class */ (function () {
         this.user = "";
         this.source = "";
         this.status = "";
+        this.method = "";
         this.page = 1;
         this.limit = 25;
         this.sort = "insertTimestamp";

@@ -106,15 +106,18 @@ var IframeAccessComponent = /** @class */ (function () {
         this.possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&$#@";
         this.lengthOfCode = 80;
         this.route.params.subscribe(function (res) {
-            console.log("res ====== ", res);
+            var proxy = "";
+            if (res.proxy) {
+                proxy = res.proxy;
+            }
             if (res.email && res.createdt) {
-                _this.getAccess(res.email, res.createdt);
+                _this.getAccess(res.email, res.createdt, proxy);
             }
         });
     }
     IframeAccessComponent.prototype.ngOnInit = function () {
     };
-    IframeAccessComponent.prototype.getAccess = function (email, createdt) {
+    IframeAccessComponent.prototype.getAccess = function (email, createdt, proxy) {
         var _this = this;
         this.spinner.show();
         var postObject = {
@@ -122,6 +125,9 @@ var IframeAccessComponent = /** @class */ (function () {
             createdt: createdt,
             source: 'Admin Portal'
         };
+        if (proxy != "") {
+            postObject['proxy'] = proxy;
+        }
         this.globalService.getConfig(postObject).subscribe(function (configDdata) {
             _this.globalService.getAccess(postObject).subscribe(function (data) {
                 if (data != "") {
