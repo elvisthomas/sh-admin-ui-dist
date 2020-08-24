@@ -272,6 +272,7 @@ var ListComponent = /** @class */ (function () {
         this.companySearch.limit = 25;
         this.companySearch.sort = "companyName";
         this.companySearch.sortOrder = 'ASC';
+        this.previousOrder = 'companyName';
         this.reverse = true;
         this.getCompanies();
     };

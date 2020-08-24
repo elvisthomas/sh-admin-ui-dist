@@ -141,6 +141,7 @@ var IframeAccessComponent = /** @class */ (function () {
                         isCustomerAdmin: data.isCustomerAdmin,
                         isSuccessHackerAdmin: data.isSuccessHackerAdmin,
                         company: data.company,
+                        createDate: data.createDate,
                         config: configDdata
                     };
                     _this.jwtService.saveCurrentUser(JSON.stringify(userDetails));
