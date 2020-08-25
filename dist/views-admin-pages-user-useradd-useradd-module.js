@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" [hidden]=\"loadingData\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">{{ user?.userId ? 'Edit' : 'Add' }} User</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Company:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.company, 'text-primary': user.company}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-8 mg-t-5 mg-md-t-0\">\r\n                  <select #s id=\"company\" class=\"form-control\" name=\"company\" [ngModel]=\"user.company\" (ngModelChange)=\"changeCompany(user.company, $event, s)\" *ngIf=\"permission.view\">\r\n                    <option value=\"\">Select Company</option>\r\n                    <option [ngValue]=\"company\" *ngFor=\"let company of companies;\">{{ company?.companyName }}</option>\r\n                  </select>\r\n                  <input class=\"form-control\" type=\"text\" [value]=\"user?.company?.companyName\" readonly *ngIf=\"!permission.view\">\r\n                </div>\r\n                <div class=\"col-md-1 mg-t-5 mg-md-t-0\" *ngIf=\"permission.view\">\r\n                  <button class=\"btn ripple btn-success btn-icon pull-right\" [routerLink]=\"['/company/add']\" tooltip=\"Add new company\"><i class=\"fe fe-plus\"></i></button>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">First Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.firstName, 'text-primary': user.firstName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter First Name\" type=\"text\" [(ngModel)]=\"user.firstName\" name=\"firstName\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Last Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.lastName, 'text-primary': user.lastName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter Last Name\" type=\"text\" [(ngModel)]=\"user.lastName\" name=\"lastName\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Email Address:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.emailAddress, 'text-primary': user.emailAddress}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter Email Address\" type=\"text\" [(ngModel)]=\"user.emailAddress\" name=\"emailAddress\" (ngModelChange)=\"checkValidEmail(user?.emailAddress)\">\r\n                  <p class=\"alert custom-p alert-danger validation-font-size  text-left\" role=\"alert\" *ngIf=\"!validEmail\">\r\n                    Your email address is invalid. Please enter a valid address.\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isActive\" name=\"isActive\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" [hidden]=\"isShDomain && permission.view\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Admin:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isCustomerAdmin\" name=\"isCustomerAdmin\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"permission.view && isShDomain\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">SuccessHacker Admin:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isSuccessHackerAdmin\" name=\"isSuccessHackerAdmin\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Reporting:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.reportingAccess\" name=\"reportingAccess\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Created By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ user?.createdBy?.fullName }} | {{ user?.createDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId && user?.modifiedBy\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Modified By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ user?.modifiedBy?.fullName }} | {{ user?.modifiedDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Last Login:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <span *ngIf=\"user?.lastSeenDate\">\r\n                    {{ user?.lastSeenDate | date: 'yyyy-MM-dd hh:mm' }}\r\n                  </span>\r\n                  <span *ngIf=\"!user?.lastSeenDate\">\r\n                    Never\r\n                  </span>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-12 mg-b-20\">\r\n                  <div class=\"btn-icon-list\">\r\n                    Groups: &nbsp;&nbsp;\r\n                    <button class=\"btn ripple btn-success btn-icon\" (click)=\"showAddGroupModal()\"  tooltip=\"Add new group\"><i class=\"fe fe-plus\"></i></button>\r\n                    <button class=\"btn ripple btn-primary btn-icon\" *ngIf=\"user?.company?.companyId && permission.view\" [routerLink]=\"['/company/edit', user?.company?.companyId]\" tooltip=\"Company list\"><i class=\"fe fe-list\"></i></button>\r\n                  </div>\r\n                </div>\r\n                <div *ngIf=\"user?.company?.groups?.length\">\r\n                  <p *ngFor=\"let group of user.company.groups\" class=\"group-list\">\r\n                    <label> <input type=\"checkbox\" (change)=\"selectGroup(group)\" /> {{ group }} </label>\r\n                  </p>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            \r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n              <div class=\"form-group row justify-content-end mb-0\">\r\n                <div class=\"col-md-12\">\r\n                  <!-- <app-alert></app-alert> -->\r\n                  <button class=\"btn ripple btn-light pd-x-30 pull-right\" [routerLink]=\"['/user/list']\">Cancel</button>&nbsp;&nbsp;\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" (click)=\"saveUser()\" *ngIf=\"!user?.userId\" [disabled]=\"!user.company || !user.firstName || !user.lastName || !user.emailAddress || !validEmail\">Save</button>\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" (click)=\"updateUser()\" *ngIf=\"user?.userId\" [disabled]=\"!user.company || !user.firstName || !user.lastName || !user.emailAddress || !validEmail\">Save</button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #addGroupModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fa fa-plus\"></i> Add Group</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"addGroupModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Enter Group Name\" />\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"addGroupModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addGroup()\" [disabled]=\"!addedGroup\">Add</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- <pre [innerHtml]=\"user | json\"></pre> -->"
+module.exports = "<div class=\"container-fluid\" [hidden]=\"loadingData\">\r\n\r\n  <!-- Page Header -->\r\n  <div class=\"page-header\">\r\n    <div>\r\n      <h2 class=\"main-content-title tx-24 mg-b-5\">{{ user?.userId ? 'Edit' : 'Add' }} User</h2>\r\n    </div>\r\n  </div>\r\n  <!-- End Page Header -->\r\n\r\n  <!-- Row -->\r\n  <div class=\"row sidemenu-height\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"card custom-card\">\r\n        <div class=\"card-body\">\r\n          \r\n          <div class=\"row\">\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Company:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.company, 'text-primary': user.company}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-8 mg-t-5 mg-md-t-0\">\r\n                  <select #s id=\"company\" class=\"form-control\" name=\"company\" [ngModel]=\"user.company\" (ngModelChange)=\"changeCompany(user.company, $event, s)\" *ngIf=\"permission.view\">\r\n                    <option value=\"\">Select Company</option>\r\n                    <option [ngValue]=\"company\" *ngFor=\"let company of companies;\">{{ company?.companyName }}</option>\r\n                  </select>\r\n                  <input class=\"form-control\" type=\"text\" [value]=\"user?.company?.companyName\" readonly *ngIf=\"!permission.view\">\r\n                </div>\r\n                <div class=\"col-md-1 mg-t-5 mg-md-t-0\" *ngIf=\"permission.view\">\r\n                  <button class=\"btn ripple btn-success btn-icon pull-right\" [routerLink]=\"['/company/add']\" tooltip=\"Add new company\"><i class=\"fe fe-plus\"></i></button>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">First Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.firstName, 'text-primary': user.firstName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter First Name\" type=\"text\" [(ngModel)]=\"user.firstName\" name=\"firstName\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Last Name:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.lastName, 'text-primary': user.lastName}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter Last Name\" type=\"text\" [(ngModel)]=\"user.lastName\" name=\"lastName\">\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Email Address:\r\n                    <sup> <i class=\"fa fa-star star-icon\" aria-hidden=\"true\"\r\n                      [ngClass]=\"{'text-danger': !user.emailAddress, 'text-primary': user.emailAddress}\"></i>\r\n                    </sup>\r\n                  </label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <input class=\"form-control\" placeholder=\"Enter Email Address\" type=\"text\" [(ngModel)]=\"user.emailAddress\" name=\"emailAddress\" (ngModelChange)=\"checkValidEmail(user?.emailAddress)\">\r\n                  <p class=\"alert custom-p alert-danger validation-font-size  text-left\" role=\"alert\" *ngIf=\"!validEmail\">\r\n                    Your email address is invalid. Please enter a valid address.\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Active:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isActive\" name=\"isActive\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" [hidden]=\"isShDomain && permission.view\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Admin:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isCustomerAdmin\" name=\"isCustomerAdmin\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"permission.view && isShDomain\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">SuccessHacker Admin:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.isSuccessHackerAdmin\" name=\"isSuccessHackerAdmin\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Reporting:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <label class=\"toggle-switch\">\r\n                    <input type=\"checkbox\" [(ngModel)]=\"user.reportingAccess\" name=\"reportingAccess\">\r\n                    <div class=\"slider\"></div>\r\n                  </label>\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Created By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ user?.createdBy?.fullName }} | {{ user?.createDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId && user?.modifiedBy\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Modified By:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  {{ user?.modifiedBy?.fullName }} | {{ user?.modifiedDate | date: 'yyyy-MM-dd' }}\r\n                </div>\r\n              </div>\r\n              <div class=\"row row-xs mg-b-20\" *ngIf=\"user?.userId\">\r\n                <div class=\"col-md-3\">\r\n                  <label class=\"mg-b-0\">Last Login:</label>\r\n                </div>\r\n                <div class=\"col-md-9 mg-t-5 mg-md-t-0\">\r\n                  <span *ngIf=\"user?.lastSeenDate\">\r\n                    {{ user?.lastSeenDate | date: 'yyyy-MM-dd hh:mm' }}\r\n                  </span>\r\n                  <span *ngIf=\"!user?.lastSeenDate\">\r\n                    Never\r\n                  </span>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-md-6\">\r\n              <div class=\"row row-xs mg-b-20\">\r\n                <div class=\"col-md-12 mg-b-20\">\r\n                  <div class=\"\">\r\n                    <div>\r\n                      Groups:\r\n                    </div>\r\n                    <div class=\"row\" [hidden]=\"!permission.view\">\r\n                      <div class=\"col-md-8 input-group\">\r\n                        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Add new group\" (keyup.enter)=\"addGroup()\"/>\r\n                        <span class=\"input-group-btn\">\r\n                          <button class=\"btn ripple btn-success btn-icon\" (click)=\"addGroup()\" tooltip=\"{{ addedGroup ? 'Add this group' : 'Enter a group name to add a group' }}\"><i class=\"fe fe-plus\" ></i></button>\r\n                        </span>\r\n                        <span class=\"input-group-btn\">\r\n                          <button class=\"btn ripple btn-primary btn-icon\" [disabled]=\"user?.company?.companyId && permission.view\" [routerLink]=\"['/company/edit', user?.company?.companyId]\" tooltip=\"Company list\"><i class=\"fe fe-list\"></i></button>\r\n                        </span>\r\n                      </div>\r\n                    </div>  \r\n\r\n                  </div>\r\n                </div>\r\n\r\n                <div class=\"tbody-scroll\" *ngIf=\"companiesGroup?.length\">\r\n                  <table class=\"table mg-b-0\">\r\n                    <thead class=\"nowrap\">\r\n                      <tr>\r\n                        <th>\r\n                          <input type=\"checkbox\" [(ngModel)]=\"multiSelect\" name=\"multiSelect\" (click)=\"multiSelectGroup(multiSelect)\"/>\r\n                        </th>\r\n                        <th [class.active]=\"groupOrder === 'name'\" (click)=\"setOrder()\">\r\n                          Name\r\n                          <span [hidden]=\"groupReverse\">▼</span>\r\n                          <span [hidden]=\"!groupReverse\">▲</span>\r\n                        </th>\r\n                      </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                      <tr *ngFor=\"let group of companiesGroup; let i = index;\">\r\n                        <td><input type=\"checkbox\" [(ngModel)]=\"group.added\" name=\"group{{i}}\"/></td>\r\n                        <td>{{ group?.name }}</td>\r\n                      </tr>\r\n                    </tbody>\r\n                  </table>\r\n                </div>\r\n\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n              <div class=\"form-group row justify-content-end mb-0\">\r\n                <div class=\"col-md-12\">\r\n                  <!-- <app-alert></app-alert> -->\r\n                  <button class=\"btn ripple btn-light pd-x-30 pull-right\" [routerLink]=\"['/user/list']\">Cancel</button>&nbsp;&nbsp;\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" (click)=\"saveUser()\" *ngIf=\"!user?.userId\" [disabled]=\"!user.company || !user.firstName || !user.lastName || !user.emailAddress || !validEmail\">Save</button>\r\n                  <button class=\"btn ripple btn-primary pd-x-30 mg-r-5 pull-right\" (click)=\"updateUser()\" *ngIf=\"user?.userId\" [disabled]=\"!user.company || !user.firstName || !user.lastName || !user.emailAddress || !validEmail\">Save</button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- End Row -->\r\n\r\n</div>\r\n\r\n<div bsModal [config]=\"{backdrop: 'static', keyboard: false}\"  #addGroupModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\naria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n  <div class=\"modal-dialog\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\"><i class=\"fa fa-plus\"></i> Add Group</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"addGroupModal.hide();\" aria-label=\"Close\">\r\n        <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"addedGroup\" name=\"addedGroup\" placeholder=\"Enter Group Name\" />\r\n      </div>\r\n      <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-light\" (click)=\"addGroupModal.hide();\">Close</button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"addGroup()\" [disabled]=\"!addedGroup\">Add</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- <pre [innerHtml]=\"user | json\"></pre> -->"
 
 /***/ }),
 
@@ -125,6 +125,9 @@ var UseraddComponent = /** @class */ (function () {
         this.selectedGroups = [];
         this.addedGroup = "";
         this.loadingData = false;
+        this.groupOrder = 'name';
+        this.groupReverse = false;
+        this.companiesGroup = [];
         this.validEmail = true;
         this.globalService.setLoadingLabel('Loading... Please Wait.');
         this.currentUser = JSON.parse(this.jwtService.getCurrentUser());
@@ -142,6 +145,10 @@ var UseraddComponent = /** @class */ (function () {
             };
         }
     }
+    UseraddComponent.prototype.setOrder = function () {
+        this.groupReverse = !this.groupReverse;
+        this.companiesGroup.reverse();
+    };
     UseraddComponent.prototype.ngOnInit = function () {
         this.getCompanies();
     };
@@ -195,6 +202,18 @@ var UseraddComponent = /** @class */ (function () {
                     if (found.length) {
                         _this.user.company = found[0];
                     }
+                    _this.user.company.groups.forEach(function (element) {
+                        if (_this.user.groups && _this.user.groups.length) {
+                            var foundGroup = _this.user.groups.filter(function (e) { return e == element; });
+                            if (foundGroup.length) {
+                                _this.companiesGroup.push({ name: element, added: true });
+                            }
+                            else {
+                                _this.companiesGroup.push({ name: element });
+                            }
+                        }
+                    });
+                    _this.sortAlphaNum();
                 }
             }
             _this.spinner.hide();
@@ -218,6 +237,12 @@ var UseraddComponent = /** @class */ (function () {
         }
         this.globalService.setLoadingLabel("Inserting... Please Wait.");
         this.spinner.show();
+        var tempGroups = [];
+        this.companiesGroup.forEach(function (element) {
+            if (element.added) {
+                tempGroups.push(element.name);
+            }
+        });
         var postData = {
             firstName: this.user.firstName,
             lastName: this.user.lastName,
@@ -226,7 +251,7 @@ var UseraddComponent = /** @class */ (function () {
             customerAdmin: this.user.isCustomerAdmin ? 1 : 0,
             successHackerAdmin: this.user.isSuccessHackerAdmin ? 1 : 0,
             reportingAccess: this.user.reportingAccess ? 1 : 0,
-            groups: this.user.company.groups,
+            groups: tempGroups,
             company: this.user.company.companyId,
             creator: this.currentUser.id
         };
@@ -251,6 +276,12 @@ var UseraddComponent = /** @class */ (function () {
     };
     UseraddComponent.prototype.updateUser = function () {
         var _this = this;
+        var tempGroups = [];
+        this.companiesGroup.forEach(function (element) {
+            if (element.added) {
+                tempGroups.push(element.name);
+            }
+        });
         var postData = {
             firstName: this.user.firstName,
             lastName: this.user.lastName,
@@ -259,7 +290,7 @@ var UseraddComponent = /** @class */ (function () {
             customerAdmin: this.user.isCustomerAdmin ? 1 : 0,
             successHackerAdmin: this.user.isSuccessHackerAdmin ? 1 : 0,
             reportingAccess: this.user.reportingAccess ? 1 : 0,
-            groups: this.user.company.groups,
+            groups: tempGroups,
             company: this.user.company.companyId,
             modifier: this.currentUser.id
         };
@@ -284,22 +315,64 @@ var UseraddComponent = /** @class */ (function () {
             }
         });
     };
-    UseraddComponent.prototype.selectGroup = function (group) {
-        var found = this.selectedGroups.filter(function (e) { return e == group; });
-        if (found.length) {
-            this.selectedGroups.splice(this.selectedGroups.indexOf(found[0]), 1);
-        }
-        else {
-            this.selectedGroups.push(group);
-        }
-    };
     UseraddComponent.prototype.showAddGroupModal = function () {
         this.addedGroup = "";
         this.addGroupModal.show();
     };
     UseraddComponent.prototype.addGroup = function () {
-        this.user.company.groups.push(this.addedGroup);
-        this.addGroupModal.hide();
+        var _this = this;
+        if (this.addedGroup != "") {
+            var found = this.selectedGroups.filter(function (e) { return e.name == _this.addedGroup; });
+            if (found.length) {
+                this.toastr.info("This group is already exists!", 'Info');
+                return;
+            }
+            else {
+                if (this.user.company && !this.user.company['groups']) {
+                    this.user.company['groups'] = [];
+                }
+                var tempGroups = Object.assign([], this.user.company.groups);
+                tempGroups.push(this.addedGroup);
+                var postData = {
+                    name: this.user.company.companyName,
+                    modifier: this.currentUser.id,
+                    groups: tempGroups
+                };
+                this.globalService.setLoadingLabel('Updating... Please Wait.');
+                this.spinner.show();
+                this.globalService.updateCompany(postData, this.user.company.companyId).subscribe(function (data) {
+                    _this.spinner.hide();
+                    if (data && data.modifiedBy) {
+                        _this.toastr.success("Data updated successfully.", "Success");
+                        _this.user.company.groups.push(_this.addedGroup);
+                        _this.companiesGroup.push({ name: _this.addedGroup });
+                        _this.addedGroup = "";
+                        _this.sortAlphaNum();
+                    }
+                    else {
+                        _this.toastr.error("There are some server error while updating the data!", "Error");
+                    }
+                }, function (error) {
+                    _this.spinner.hide();
+                    if (error && error.error && error.error.message) {
+                        _this.toastr.error(error.error.message, 'Error ' + error.status);
+                    }
+                    else {
+                        _this.toastr.error(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].reponseCode[error.status], 'Error');
+                    }
+                });
+            }
+        }
+    };
+    UseraddComponent.prototype.multiSelectGroup = function (multiSelect) {
+        this.companiesGroup.forEach(function (element) {
+            if (multiSelect) {
+                element.added = false;
+            }
+            else {
+                element.added = true;
+            }
+        });
     };
     UseraddComponent.prototype.deleteGroup = function () {
         var _this = this;
@@ -310,7 +383,25 @@ var UseraddComponent = /** @class */ (function () {
             });
         }
     };
+    UseraddComponent.prototype.sortAlphaNum = function () {
+        var reA = /[^a-zA-Z]/g;
+        var reN = /[^0-9]/g;
+        function sortAlphaNum(a, b) {
+            var aA = a.name.replace(reA, "");
+            var bA = b.name.replace(reA, "");
+            if (aA === bA) {
+                var aN = parseInt(a.name.replace(reN, ""), 10);
+                var bN = parseInt(b.name.replace(reN, ""), 10);
+                return aN === bN ? 0 : aN > bN ? 1 : -1;
+            }
+            else {
+                return aA > bA ? 1 : -1;
+            }
+        }
+        this.companiesGroup = this.companiesGroup.sort(sortAlphaNum);
+    };
     UseraddComponent.prototype.changeCompany = function (previousCompany, company, companysEl) {
+        var _this = this;
         // If we're changing company from "All" to any, it's OK
         if (previousCompany === "") {
             this.user.company = company;
@@ -319,6 +410,10 @@ var UseraddComponent = /** @class */ (function () {
         // Otherwise we want the user to confirm that change
         if (confirm("Are you sure you want to change " + this.user.firstName + "'s company from " + previousCompany.companyName + " to " + company.companyName + "? This change will apply all consumption to " + company.companyName + ".")) {
             this.user.company = company;
+            this.user.company.groups.forEach(function (element) {
+                _this.companiesGroup.push({ name: element });
+            });
+            this.sortAlphaNum();
         }
         else {
             companysEl.selectedIndex = this.companies.indexOf(previousCompany) + 1;
