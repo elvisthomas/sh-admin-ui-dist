@@ -1,0 +1,44 @@
+{
+  "id": "2", 
+  "emailAddress": "pr@friskmethods.net",
+  "lastName": "Ravakoli",
+  "firstName": "Pula",
+  "isSuccessHackerAdmin": 0,
+  "lastSeenDate": "2019-10-05 17:28:08.310",
+  "createDate": "2018-06-15 19:03:51.277",
+  "company": {
+    "modifiedBy": {
+      "id": 3908,
+      "fullName": "Data Pipeline"
+    },
+    "userCount": 1,
+    "groups": [
+      "Frisk Methods Test Group"
+    ],
+    "id": 1,
+    "modifiedDate": "2019-02-01",
+    "createdBy": {
+      "id": 3908,
+      "fullName": "Data Pipeline"
+    },
+    "createDate": "2019-01-01",
+    "name": "friskmethods",
+    "isActive": 1
+  },
+  "modifiedBy": {
+    "userId": "3908",
+    "fullName": "Data Pipeline"
+  },
+  "userId": 15,
+  "fullName": "Pula Ravakoli",
+  "isCustomerAdmin": 0,
+  "createdBy": {
+    "userId": "3908",
+    "fullName": "Data Pipeline"
+  },
+  "modifiedDate": "2019-10-05 17:28:08.310",
+  "groups": [
+    "Frisk Methods Test Group"
+  ],
+  "isActive": 1
+}
